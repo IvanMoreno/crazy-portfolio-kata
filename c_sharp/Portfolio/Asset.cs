@@ -24,7 +24,7 @@ public class Asset
     // Magic literal
     // Duplicated code
     // Long Method
-    public Value UpdateValue(DateTime now) {
+    public Value GetValue(DateTime now) {
         if (Description == "French Wine") {
             if (Date.Subtract(now).TotalDays < 0) {
                 if (Value.Get() < 200) 
