@@ -20,6 +20,10 @@ public class Asset
 
     public Value Value { get; set; }
 
+    // Complicated boolean expression
+    // Magic literal
+    // Duplicated code
+    // Long Method
     public void UpdateValue(DateTime now) {
         if (Date.Subtract(now).TotalDays < 0)
         {

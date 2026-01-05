@@ -13,12 +13,8 @@ public class Portfolio
         _portfolioDisplay = portfolioDisplay;
     }
     
-    // Long Method
     // Divergent change
-    // Complicated boolean expression
-    // Magic literal
     // Feature Envy
-    // Duplicated code
     // Special Case
     public void ComputePortfolioValue()
     {
