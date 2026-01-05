@@ -19,6 +19,7 @@ public class Portfolio
     // Magic literal
     // Feature Envy
     // Duplicated code
+    // Special Case
     public void ComputePortfolioValue()
     {
         var now = DateTime.Now;
