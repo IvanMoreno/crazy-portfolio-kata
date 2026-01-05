@@ -7,10 +7,10 @@ public class Portfolio
     private readonly string _portfolioCsvPath;
     private readonly PortfolioDisplay _portfolioDisplay;
 
-    public Portfolio(string portfolioCsvPath)
+    public Portfolio(string portfolioCsvPath, LogDisplay portfolioDisplay)
     {
         _portfolioCsvPath = portfolioCsvPath;
-        _portfolioDisplay = new LogDisplay();
+        _portfolioDisplay = portfolioDisplay;
     }
     
     // Long Method

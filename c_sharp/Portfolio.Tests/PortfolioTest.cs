@@ -7,7 +7,7 @@ public class PortfolioTest
     [Test]
     public void Fix_Me()
     {
-        var app = new Portfolio("../../../portfolio.csv");
+        var app = new Portfolio("../../../portfolio.csv", new LogDisplay());
 
         app.ComputePortfolioValue();
 
