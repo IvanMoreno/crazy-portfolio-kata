@@ -7,7 +7,7 @@ public class Portfolio
     private readonly string _portfolioCsvPath;
     private readonly PortfolioDisplay _portfolioDisplay;
 
-    public Portfolio(string portfolioCsvPath, LogDisplay portfolioDisplay)
+    public Portfolio(string portfolioCsvPath, PortfolioDisplay portfolioDisplay)
     {
         _portfolioCsvPath = portfolioCsvPath;
         _portfolioDisplay = portfolioDisplay;
