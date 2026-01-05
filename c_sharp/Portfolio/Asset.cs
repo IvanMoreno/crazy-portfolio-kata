@@ -26,48 +26,33 @@ public class Asset
     // Long Method
     public void UpdateValue(DateTime now) {
         if (Description == "French Wine") {
-            NewMethod(now);
+            NewMethod(now, Description == "French Wine");
         }
         else {
-            NewMethod(now);
+            NewMethod(now, Description == "French Wine");
         }
     }
 
-    void NewMethod(DateTime now) {
-        if (Date.Subtract(now).TotalDays < 0)
-        {
-            if (Description != "French Wine")
-            {
-                if (Description != "Lottery Prediction")
-                {
+    void NewMethod(DateTime now, bool isFrenchWine) {
+        if (Date.Subtract(now).TotalDays < 0) {
+            if (isFrenchWine) {
+                if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 20);
+            }
+            else {
+                if (Description != "Lottery Prediction") {
                     if (Value.Get() > 0) {
                         Value = new MeasurableValue(Value.Get() - 20);
                     }
                 }
-                else
-                {
+                else {
                     Value = new MeasurableValue(Value.Get() - Value.Get());
                 }
             }
-            else
-            {
-                if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 20);
-            }
         }
-        else
-        {
-            if (Description != "French Wine" && Description != "Lottery Prediction")
-            {
-                if (Value.Get() > 0.0) {
-                    Value = new MeasurableValue(Value.Get() - 10);
-                }
-            }
-            else
-            {
-                if (Description == "Lottery Prediction")
-                {
-                    if (Value.Get() < 800)
-                    {
+        else {
+            if (isFrenchWine || Description == "Lottery Prediction") {
+                if (Description == "Lottery Prediction") {
+                    if (Value.Get() < 800) {
                         Value = new MeasurableValue(Value.Get() + 5);
 
                         if (Date.Subtract(now).TotalDays < 11)
@@ -79,9 +64,13 @@ public class Asset
                                 Value = new MeasurableValue(Value.Get() + 100);
                     }
                 }
-                else
-                {
+                else {
                     if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
+                }
+            }
+            else {
+                if (Value.Get() > 0.0) {
+                    Value = new MeasurableValue(Value.Get() - 10);
                 }
             }
         }
