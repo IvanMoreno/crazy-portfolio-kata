@@ -33,7 +33,15 @@ public class Portfolio
                 return;
             }
 
-            portfolioValue = portfolioValue.Add(asset.GetValue(now));
+            var assetValue = asset.GetValue(now);
+            if (assetValue is PricelessValue) {
+                Console.WriteLine(
+                    "Portfolio is priceless because it got a unicorn on " +
+                    asset.Date.ToString(CurrentCulture) + "!!!!!");
+                return;
+            }
+            
+            portfolioValue = portfolioValue.Add(assetValue);
         }
 
         _portfolioDisplay.Display(portfolioValue);
