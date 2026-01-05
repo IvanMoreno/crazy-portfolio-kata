@@ -28,40 +28,39 @@ public class Asset
         if (Description == "French Wine") {
             if (Date.Subtract(now).TotalDays < 0) {
                 if (Value.Get() < 200) 
-                    Value = new MeasurableValue(Value.Get() + 20);
+                    return new MeasurableValue(Value.Get() + 20);
             }
             else {
                 if (Value.Get() < 200) 
-                    Value = new MeasurableValue(Value.Get() + 10);
+                    return new MeasurableValue(Value.Get() + 10);
+            }
+        }
+        else if (Description == "Lottery Prediction") {
+            if (Date.Subtract(now).TotalDays < 0) {
+                return new MeasurableValue(Value.Get() - Value.Get());
+            }
+        
+            if (Value.Get() < 800) {
+                var result = new MeasurableValue(Value.Get() + 5);
+        
+                if (Date.Subtract(now).TotalDays < 11 && result.Get() < 800) 
+                    result = new MeasurableValue(result.Get() + 20);
+        
+                if (Date.Subtract(now).TotalDays < 6 && result.Get() < 800) 
+                    result = new MeasurableValue(result.Get() + 100);
+        
+                return result;
             }
         }
         else {
-            if (Description == "Lottery Prediction") {
-                if (Date.Subtract(now).TotalDays < 0) {
-                    Value = new MeasurableValue(Value.Get() - Value.Get());
-                }
-                else {
-                    if (Value.Get() < 800) {
-                        Value = new MeasurableValue(Value.Get() + 5);
-
-                        if (Date.Subtract(now).TotalDays < 11 && Value.Get() < 800) 
-                            Value = new MeasurableValue(Value.Get() + 20);
-
-                        if (Date.Subtract(now).TotalDays < 6 && Value.Get() < 800) 
-                            Value = new MeasurableValue(Value.Get() + 100);
-                    }
+            if (Date.Subtract(now).TotalDays < 0) {
+                if (Value.Get() > 0) {
+                    return new MeasurableValue(Value.Get() - 20);
                 }
             }
             else {
-                if (Date.Subtract(now).TotalDays < 0) {
-                    if (Value.Get() > 0) {
-                        Value = new MeasurableValue(Value.Get() - 20);
-                    }
-                }
-                else {
-                    if (Value.Get() > 0.0) {
-                        Value = new MeasurableValue(Value.Get() - 10);
-                    }
+                if (Value.Get() > 0.0) {
+                    return new MeasurableValue(Value.Get() - 10);
                 }
             }
         }
