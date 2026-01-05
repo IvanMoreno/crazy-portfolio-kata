@@ -27,13 +27,9 @@ public class Portfolio
         var portfolioValue = new MeasurableValue(0);
         var assets = new List<Asset>();
 
-        foreach (var line in lines)
-        {
-            var columns = line.Split(",");
-            var asset = new Asset(columns[0],
-                DateTime.Parse(columns[1], CurrentCulture),
-                columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
-            
+        foreach (var line in lines) {
+            var asset = Parse(line);
+
             assets.Add(asset);
         }
 
@@ -126,5 +122,13 @@ public class Portfolio
         }
 
         _portfolioDisplay.Display(portfolioValue);
+    }
+
+    static Asset Parse(string line) {
+        var columns = line.Split(",");
+        var asset = new Asset(columns[0],
+            DateTime.Parse(columns[1], CurrentCulture),
+            columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
+        return asset;
     }
 }
