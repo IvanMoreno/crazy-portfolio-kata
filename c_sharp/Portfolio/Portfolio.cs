@@ -42,9 +42,6 @@ public class Portfolio
 
     static Asset Parse(string line) {
         var columns = line.Split(",");
-        
-        return new Asset(columns[0],
-            DateTime.Parse(columns[1], CurrentCulture),
-            columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
+        return new Asset(columns[0], DateTime.Parse(columns[1], CurrentCulture), new MeasurableValue(int.Parse(columns[2])));
     }
 }
