@@ -26,51 +26,86 @@ public class Asset
     // Long Method
     public void UpdateValue(DateTime now) {
         if (Description == "French Wine") {
-            NewMethod(now, true);
-        }
-        else {
-            NewMethod(now, false);
-        }
-    }
-
-    void NewMethod(DateTime now, bool isFrenchWine) {
-        if (Date.Subtract(now).TotalDays < 0) {
-            if (isFrenchWine) {
-                if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 20);
-            }
-            else {
-                if (Description != "Lottery Prediction") {
-                    if (Value.Get() > 0) {
-                        Value = new MeasurableValue(Value.Get() - 20);
-                    }
+            if (Date.Subtract(now).TotalDays < 0) {
+                if (true) {
+                    if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 20);
                 }
                 else {
-                    Value = new MeasurableValue(Value.Get() - Value.Get());
-                }
-            }
-        }
-        else {
-            if (isFrenchWine || Description == "Lottery Prediction") {
-                if (Description == "Lottery Prediction") {
-                    if (Value.Get() < 800) {
-                        Value = new MeasurableValue(Value.Get() + 5);
-
-                        if (Date.Subtract(now).TotalDays < 11)
-                            if (Value.Get() < 800)
-                                Value = new MeasurableValue(Value.Get() + 20);
-
-                        if (Date.Subtract(now).TotalDays < 6)
-                            if (Value.Get() < 800)
-                                Value = new MeasurableValue(Value.Get() + 100);
+                    if (Description != "Lottery Prediction") {
+                        if (Value.Get() > 0) {
+                            Value = new MeasurableValue(Value.Get() - 20);
+                        }
                     }
-                }
-                else {
-                    if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
+                    else {
+                        Value = new MeasurableValue(Value.Get() - Value.Get());
+                    }
                 }
             }
             else {
-                if (Value.Get() > 0.0) {
-                    Value = new MeasurableValue(Value.Get() - 10);
+                if (true || Description == "Lottery Prediction") {
+                    if (Description == "Lottery Prediction") {
+                        if (Value.Get() < 800) {
+                            Value = new MeasurableValue(Value.Get() + 5);
+
+                            if (Date.Subtract(now).TotalDays < 11)
+                                if (Value.Get() < 800)
+                                    Value = new MeasurableValue(Value.Get() + 20);
+
+                            if (Date.Subtract(now).TotalDays < 6)
+                                if (Value.Get() < 800)
+                                    Value = new MeasurableValue(Value.Get() + 100);
+                        }
+                    }
+                    else {
+                        if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
+                    }
+                }
+                else {
+                    if (Value.Get() > 0.0) {
+                        Value = new MeasurableValue(Value.Get() - 10);
+                    }
+                }
+            }
+        }
+        else {
+            if (Date.Subtract(now).TotalDays < 0) {
+                if (false) {
+                    if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 20);
+                }
+                else {
+                    if (Description != "Lottery Prediction") {
+                        if (Value.Get() > 0) {
+                            Value = new MeasurableValue(Value.Get() - 20);
+                        }
+                    }
+                    else {
+                        Value = new MeasurableValue(Value.Get() - Value.Get());
+                    }
+                }
+            }
+            else {
+                if (false || Description == "Lottery Prediction") {
+                    if (Description == "Lottery Prediction") {
+                        if (Value.Get() < 800) {
+                            Value = new MeasurableValue(Value.Get() + 5);
+
+                            if (Date.Subtract(now).TotalDays < 11)
+                                if (Value.Get() < 800)
+                                    Value = new MeasurableValue(Value.Get() + 20);
+
+                            if (Date.Subtract(now).TotalDays < 6)
+                                if (Value.Get() < 800)
+                                    Value = new MeasurableValue(Value.Get() + 100);
+                        }
+                    }
+                    else {
+                        if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
+                    }
+                }
+                else {
+                    if (Value.Get() > 0.0) {
+                        Value = new MeasurableValue(Value.Get() - 10);
+                    }
                 }
             }
         }
