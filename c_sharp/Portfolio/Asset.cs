@@ -25,6 +25,9 @@ public class Asset
     // Duplicated code
     // Long Method
     public Value GetValue(DateTime now) {
+        if (Description == "Unicorn") {
+            return new PricelessValue();
+        }
         if (Description == "French Wine") {
             if (Date.Subtract(now).TotalDays < 0) {
                 if (Value.Get() < 200) 

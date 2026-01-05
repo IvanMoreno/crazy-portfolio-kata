@@ -26,13 +26,6 @@ public class Portfolio
 
         foreach (var asset in assets) {
             // Special case
-            if (asset.Description == "Unicorn") {
-                Console.WriteLine(
-                    "Portfolio is priceless because it got a unicorn on " +
-                    asset.Date.ToString(CurrentCulture) + "!!!!!");
-                return;
-            }
-
             var assetValue = asset.GetValue(now);
             if (assetValue is PricelessValue) {
                 Console.WriteLine(
