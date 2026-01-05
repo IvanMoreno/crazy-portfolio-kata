@@ -18,15 +18,11 @@ public class Portfolio
     // Special Case
     public void ComputePortfolioValue()
     {
-        var now = DateTime.Now;
-        var readText = File.ReadAllText(_portfolioCsvPath);
-        var lines = readText.Split(Environment.NewLine);
         var portfolioValue = new MeasurableValue(0);
-        var assets = lines.Select(Parse);
 
-        foreach (var asset in assets) {
+        foreach (var asset in GetAllAssets()) {
             // Special case
-            var assetValue = asset.GetValue(now);
+            var assetValue = asset.GetValue(DateTime.Now);
             if (assetValue is PricelessValue) {
                 Console.WriteLine(
                     "Portfolio is priceless because it got a unicorn on " +
@@ -38,6 +34,12 @@ public class Portfolio
         }
 
         _portfolioDisplay.Display(portfolioValue);
+    }
+
+    IEnumerable<Asset> GetAllAssets() {
+        var readText = File.ReadAllText(_portfolioCsvPath);
+        var lines = readText.Split(Environment.NewLine);
+        return lines.Select(Parse);
     }
 
     static Asset Parse(string line) {
