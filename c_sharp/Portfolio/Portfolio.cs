@@ -123,13 +123,3 @@ public class Portfolio
         _portfolioDisplay.Display(portfolioValue);
     }
 }
-
-public interface PortfolioDisplay {
-    void Display(MeasurableValue portfolioValue);
-}
-
-public class LogDisplay : PortfolioDisplay {
-    public void Display(MeasurableValue portfolioValue) {
-        Console.WriteLine(portfolioValue);
-    }
-}
