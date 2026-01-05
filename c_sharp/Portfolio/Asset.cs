@@ -37,28 +37,28 @@ public class Asset
         }
         else {
             if (Description == "Lottery Prediction") {
-                NewMethod(now);
+                NewMethod(now, Description == "Lottery Prediction");
             }
             else {
-                NewMethod(now);
+                NewMethod(now, Description == "Lottery Prediction");
             }
         }
     }
 
-    void NewMethod(DateTime now) {
+    void NewMethod(DateTime now, bool isLotteryPrediction) {
         if (Date.Subtract(now).TotalDays < 0) {
-            if (Description != "Lottery Prediction") {
+            if (isLotteryPrediction) {
+                Value = new MeasurableValue(Value.Get() - Value.Get());
+            }
+            else {
                 if (Value.Get() > 0) {
                     Value = new MeasurableValue(Value.Get() - 20);
                 }
             }
-            else {
-                Value = new MeasurableValue(Value.Get() - Value.Get());
-            }
         }
         else {
-            if (Description == "Lottery Prediction") {
-                if (Description == "Lottery Prediction") {
+            if (isLotteryPrediction) {
+                if (isLotteryPrediction) {
                     if (Value.Get() < 800) {
                         Value = new MeasurableValue(Value.Get() + 5);
 
