@@ -29,6 +29,14 @@ public class Portfolio
         var assets = lines.Select(Parse);
 
         foreach (var asset in assets) {
+            // Special case
+            if (asset.Description == "Unicorn") {
+                Console.WriteLine(
+                    "Portfolio is priceless because it got a unicorn on " +
+                    asset.Date.ToString(CurrentCulture) + "!!!!!");
+                return;
+            }
+            
             if (asset.Date.Subtract(now).TotalDays < 0)
             {
                 if (asset.Description != "French Wine")
@@ -36,13 +44,6 @@ public class Portfolio
                     if (asset.Description != "Lottery Prediction")
                     {
                         if (asset.Value.Get() > 0) {
-                            if (asset.Description == "Unicorn") {
-                                Console.WriteLine(
-                                    "Portfolio is priceless because it got a unicorn on " +
-                                    asset.Date.ToString(CurrentCulture) + "!!!!!");
-                                return;
-                            }
-
                             asset.Value = new MeasurableValue(asset.Value.Get() - 20);
                         }
                     }
@@ -61,24 +62,7 @@ public class Portfolio
                 if (asset.Description != "French Wine" && asset.Description != "Lottery Prediction")
                 {
                     if (asset.Value.Get() > 0.0) {
-                        if (asset.Description == "Unicorn") {
-                            Console.WriteLine(
-                                "Portfolio is priceless because it got a unicorn on " +
-                                asset.Date.ToString(CurrentCulture) + "!!!!!");
-                            return;
-                        }
-
                         asset.Value = new MeasurableValue(asset.Value.Get() - 10);
-                    }
-                    else
-                    {
-                        if (asset.Description == "Unicorn")
-                        {
-                            Console.WriteLine(
-                                "Portfolio is priceless because it got a unicorn on " +
-                                asset.Date.ToString(CurrentCulture) + "!!!!!");
-                            return;
-                        }
                     }
                 }
                 else
