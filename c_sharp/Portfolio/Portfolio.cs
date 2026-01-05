@@ -33,9 +33,9 @@ public class Portfolio
                 return;
             }
 
-            asset.UpdateValue(now);
+            var value = asset.UpdateValue(now);
             
-            portfolioValue = new MeasurableValue(portfolioValue.Get() + asset.Value.Get());
+            portfolioValue = new MeasurableValue(portfolioValue.Get() + value.Get());
         }
 
         _portfolioDisplay.Display(portfolioValue);
