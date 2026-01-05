@@ -2,15 +2,24 @@ using NUnit.Framework;
 
 namespace Portfolio.Tests;
 
+public class SpyDisplay : PortfolioDisplay {
+    public MeasurableValue LastPortfolioValue { get; private set; }
+    
+    public void Display(MeasurableValue portfolioValue) {
+        LastPortfolioValue = portfolioValue;
+    }
+}
+
 public class PortfolioTest
 {
     [Test]
     public void Fix_Me()
     {
-        var app = new Portfolio("../../../portfolio.csv", new LogDisplay());
+        var spyDisplay = new SpyDisplay();
+        var app = new Portfolio("../../../portfolio_no_unicorn.csv", spyDisplay);
 
         app.ComputePortfolioValue();
 
-        Assert.That("fixme", Is.EqualTo("fixme"));
+        Assert.That(120, Is.EqualTo(spyDisplay.LastPortfolioValue.Get()));
     }
 }
