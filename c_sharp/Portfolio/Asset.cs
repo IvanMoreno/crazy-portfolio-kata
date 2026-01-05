@@ -26,10 +26,10 @@ public class Asset
     // Long Method
     public void UpdateValue(DateTime now) {
         if (Description == "French Wine") {
-            NewMethod(now, Description == "French Wine");
+            NewMethod(now, true);
         }
         else {
-            NewMethod(now, Description == "French Wine");
+            NewMethod(now, false);
         }
     }
 
