@@ -44,13 +44,11 @@ public class Asset
                     if (Value.Get() < 800) {
                         Value = new MeasurableValue(Value.Get() + 5);
 
-                        if (Date.Subtract(now).TotalDays < 11)
-                            if (Value.Get() < 800)
-                                Value = new MeasurableValue(Value.Get() + 20);
+                        if (Date.Subtract(now).TotalDays < 11 && Value.Get() < 800) 
+                            Value = new MeasurableValue(Value.Get() + 20);
 
-                        if (Date.Subtract(now).TotalDays < 6)
-                            if (Value.Get() < 800)
-                                Value = new MeasurableValue(Value.Get() + 100);
+                        if (Date.Subtract(now).TotalDays < 6 && Value.Get() < 800) 
+                            Value = new MeasurableValue(Value.Get() + 100);
                     }
                 }
             }
