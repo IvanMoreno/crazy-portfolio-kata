@@ -125,3 +125,13 @@ public class Portfolio
         Console.WriteLine(portfolioValue);
     }
 }
+
+public interface PortfolioDisplay {
+    void Display(MeasurableValue portfolioValue);
+}
+
+public class LogDisplay : PortfolioDisplay {
+    public void Display(MeasurableValue portfolioValue) {
+        Console.WriteLine(portfolioValue);
+    }
+}
