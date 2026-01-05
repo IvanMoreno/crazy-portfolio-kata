@@ -13,7 +13,7 @@ public class SpyDisplay : PortfolioDisplay {
 public class PortfolioTest
 {
     [Test]
-    public void Fix_Me()
+    public void ComputeValue()
     {
         var spyDisplay = new SpyDisplay();
         var app = new Portfolio("../../../portfolio_no_unicorn.csv", spyDisplay);
@@ -21,5 +21,15 @@ public class PortfolioTest
         app.ComputePortfolioValue();
 
         Assert.That(120, Is.EqualTo(spyDisplay.LastPortfolioValue.Get()));
+    }
+
+    [Test]
+    public void ComputeValue_FailsWhenUnicornAppears() {
+        var spyDisplay = new SpyDisplay();
+        var app = new Portfolio("../../../portfolio.csv", spyDisplay);
+
+        app.ComputePortfolioValue();
+
+        Assert.That(spyDisplay.LastPortfolioValue, Is.Null);
     }
 }
