@@ -104,11 +104,3 @@ public class PricelessValue : Value
     {
     }
 }
-
-// Dead Code
-public class NoValue : Value
-{
-    public NoValue() : base(0)
-    {
-    }
-}
