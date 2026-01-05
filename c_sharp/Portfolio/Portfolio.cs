@@ -118,6 +118,10 @@ public class Portfolio
             portfolioValue = new MeasurableValue(portfolioValue.Get() + asset.Value.Get());
         }
 
+        Display(portfolioValue);
+    }
+
+    void Display(MeasurableValue portfolioValue) {
         Console.WriteLine(portfolioValue);
     }
 }
