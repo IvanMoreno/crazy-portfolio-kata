@@ -5,12 +5,14 @@ namespace Portfolio;
 public class Portfolio
 {
     private readonly string _portfolioCsvPath;
+    private readonly PortfolioDisplay _portfolioDisplay;
 
     public Portfolio(string portfolioCsvPath)
     {
         _portfolioCsvPath = portfolioCsvPath;
+        _portfolioDisplay = new LogDisplay();
     }
-
+    
     // Long Method
     // Divergent change
     // Complicated boolean expression
@@ -122,7 +124,7 @@ public class Portfolio
     }
 
     void Display(MeasurableValue portfolioValue) {
-        Console.WriteLine(portfolioValue);
+        _portfolioDisplay.Display(portfolioValue);
     }
 }
 
