@@ -37,47 +37,77 @@ public class Asset
         }
         else {
             if (Description == "Lottery Prediction") {
-                NewMethod(now, true);
-            }
-            else {
-                NewMethod(now, false);
-            }
-        }
-    }
-
-    void NewMethod(DateTime now, bool isLotteryPrediction) {
-        if (Date.Subtract(now).TotalDays < 0) {
-            if (isLotteryPrediction) {
-                Value = new MeasurableValue(Value.Get() - Value.Get());
-            }
-            else {
-                if (Value.Get() > 0) {
-                    Value = new MeasurableValue(Value.Get() - 20);
-                }
-            }
-        }
-        else {
-            if (isLotteryPrediction) {
-                if (isLotteryPrediction) {
-                    if (Value.Get() < 800) {
-                        Value = new MeasurableValue(Value.Get() + 5);
-
-                        if (Date.Subtract(now).TotalDays < 11)
-                            if (Value.Get() < 800)
-                                Value = new MeasurableValue(Value.Get() + 20);
-
-                        if (Date.Subtract(now).TotalDays < 6)
-                            if (Value.Get() < 800)
-                                Value = new MeasurableValue(Value.Get() + 100);
+                if (Date.Subtract(now).TotalDays < 0) {
+                    if (true) {
+                        Value = new MeasurableValue(Value.Get() - Value.Get());
+                    }
+                    else {
+                        if (Value.Get() > 0) {
+                            Value = new MeasurableValue(Value.Get() - 20);
+                        }
                     }
                 }
                 else {
-                    if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
+                    if (true) {
+                        if (true) {
+                            if (Value.Get() < 800) {
+                                Value = new MeasurableValue(Value.Get() + 5);
+
+                                if (Date.Subtract(now).TotalDays < 11)
+                                    if (Value.Get() < 800)
+                                        Value = new MeasurableValue(Value.Get() + 20);
+
+                                if (Date.Subtract(now).TotalDays < 6)
+                                    if (Value.Get() < 800)
+                                        Value = new MeasurableValue(Value.Get() + 100);
+                            }
+                        }
+                        else {
+                            if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
+                        }
+                    }
+                    else {
+                        if (Value.Get() > 0.0) {
+                            Value = new MeasurableValue(Value.Get() - 10);
+                        }
+                    }
                 }
             }
             else {
-                if (Value.Get() > 0.0) {
-                    Value = new MeasurableValue(Value.Get() - 10);
+                if (Date.Subtract(now).TotalDays < 0) {
+                    if (false) {
+                        Value = new MeasurableValue(Value.Get() - Value.Get());
+                    }
+                    else {
+                        if (Value.Get() > 0) {
+                            Value = new MeasurableValue(Value.Get() - 20);
+                        }
+                    }
+                }
+                else {
+                    if (false) {
+                        if (false) {
+                            if (Value.Get() < 800) {
+                                Value = new MeasurableValue(Value.Get() + 5);
+
+                                if (Date.Subtract(now).TotalDays < 11)
+                                    if (Value.Get() < 800)
+                                        Value = new MeasurableValue(Value.Get() + 20);
+
+                                if (Date.Subtract(now).TotalDays < 6)
+                                    if (Value.Get() < 800)
+                                        Value = new MeasurableValue(Value.Get() + 100);
+                            }
+                        }
+                        else {
+                            if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
+                        }
+                    }
+                    else {
+                        if (Value.Get() > 0.0) {
+                            Value = new MeasurableValue(Value.Get() - 10);
+                        }
+                    }
                 }
             }
         }
