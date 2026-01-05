@@ -35,19 +35,15 @@ public class Portfolio
                 {
                     if (asset.Description != "Lottery Prediction")
                     {
-                        if (asset.Value.Get() > 0)
-                        {
-                            if (asset.Description != "Unicorn")
-                            {
-                                asset.Value = new MeasurableValue(asset.Value.Get() - 20);
-                            }
-                            else
-                            {
+                        if (asset.Value.Get() > 0) {
+                            if (asset.Description == "Unicorn") {
                                 Console.WriteLine(
                                     "Portfolio is priceless because it got a unicorn on " +
                                     asset.Date.ToString(CurrentCulture) + "!!!!!");
                                 return;
                             }
+
+                            asset.Value = new MeasurableValue(asset.Value.Get() - 20);
                         }
                     }
                     else
