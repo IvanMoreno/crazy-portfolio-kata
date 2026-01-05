@@ -19,6 +19,60 @@ public class Asset
     public DateTime Date => _date.Date;
 
     public Value Value { get; set; }
+
+    public void UpdateValue(DateTime now) {
+        if (this.Date.Subtract(now).TotalDays < 0)
+        {
+            if (this.Description != "French Wine")
+            {
+                if (this.Description != "Lottery Prediction")
+                {
+                    if (this.Value.Get() > 0) {
+                        this.Value = new MeasurableValue(this.Value.Get() - 20);
+                    }
+                }
+                else
+                {
+                    this.Value = new MeasurableValue(this.Value.Get() - this.Value.Get());
+                }
+            }
+            else
+            {
+                if (this.Value.Get() < 200) this.Value = new MeasurableValue(this.Value.Get() + 20);
+            }
+        }
+        else
+        {
+            if (this.Description != "French Wine" && this.Description != "Lottery Prediction")
+            {
+                if (this.Value.Get() > 0.0) {
+                    this.Value = new MeasurableValue(this.Value.Get() - 10);
+                }
+            }
+            else
+            {
+                if (this.Description == "Lottery Prediction")
+                {
+                    if (this.Value.Get() < 800)
+                    {
+                        this.Value = new MeasurableValue(this.Value.Get() + 5);
+
+                        if (this.Date.Subtract(now).TotalDays < 11)
+                            if (this.Value.Get() < 800)
+                                this.Value = new MeasurableValue(this.Value.Get() + 20);
+
+                        if (this.Date.Subtract(now).TotalDays < 6)
+                            if (this.Value.Get() < 800)
+                                this.Value = new MeasurableValue(this.Value.Get() + 100);
+                    }
+                }
+                else
+                {
+                    if (this.Value.Get() < 200) this.Value = new MeasurableValue(this.Value.Get() + 10);
+                }
+            }
+        }
+    }
 }
 
 // Data Class
