@@ -70,6 +70,7 @@ public class Asset
 }
 
 // Data Class
+// Speculative Generality
 public abstract class Value
 {
     protected readonly int _value;
