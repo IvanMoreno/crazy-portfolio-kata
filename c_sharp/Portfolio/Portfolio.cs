@@ -11,6 +11,12 @@ public class Portfolio
         _portfolioCsvPath = portfolioCsvPath;
     }
 
+    // Long Method
+    // Divergent change
+    // Complicated boolean expression
+    // Magic literal
+    // Feature Envy
+    // Duplicated code
     public void ComputePortfolioValue()
     {
         var now = DateTime.Now;

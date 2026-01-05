@@ -2,6 +2,7 @@ using System.Globalization;
 
 namespace Portfolio;
 
+// Data Class
 public class Asset
 {
     private readonly DateTime _date;
@@ -20,6 +21,7 @@ public class Asset
     public Value Value { get; set; }
 }
 
+// Data Class
 public abstract class Value
 {
     protected readonly int _value;
@@ -54,6 +56,7 @@ public class PricelessValue : Value
     }
 }
 
+// Dead Code
 public class NoValue : Value
 {
     public NoValue() : base(0)
