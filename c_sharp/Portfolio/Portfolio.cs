@@ -33,14 +33,14 @@ public class Portfolio
                 return;
             }
 
-            portfolioValue = PortfolioValue(portfolioValue, asset, now);
+            portfolioValue = Add(portfolioValue, asset.GetValue(now));
         }
 
         _portfolioDisplay.Display(portfolioValue);
     }
 
-    static MeasurableValue PortfolioValue(MeasurableValue portfolioValue, Asset asset, DateTime now) {
-        return new MeasurableValue(portfolioValue.Get() + asset.GetValue(now).Get());
+    static MeasurableValue Add(Value value, Value addend) {
+        return new MeasurableValue(value.Get() + addend.Get());
     }
 
     static Asset Parse(string line) {
