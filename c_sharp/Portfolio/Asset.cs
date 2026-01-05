@@ -37,10 +37,10 @@ public class Asset
         }
         else {
             if (Description == "Lottery Prediction") {
-                NewMethod(now, Description == "Lottery Prediction");
+                NewMethod(now, true);
             }
             else {
-                NewMethod(now, Description == "Lottery Prediction");
+                NewMethod(now, false);
             }
         }
     }
