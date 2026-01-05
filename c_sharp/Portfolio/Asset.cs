@@ -25,6 +25,15 @@ public class Asset
     // Duplicated code
     // Long Method
     public void UpdateValue(DateTime now) {
+        if (Description == "French Wine") {
+            NewMethod(now);
+        }
+        else {
+            NewMethod(now);
+        }
+    }
+
+    void NewMethod(DateTime now) {
         if (Date.Subtract(now).TotalDays < 0)
         {
             if (Description != "French Wine")
