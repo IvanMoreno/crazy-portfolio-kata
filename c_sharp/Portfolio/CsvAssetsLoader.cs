@@ -2,10 +2,10 @@ using System.Globalization;
 
 namespace Portfolio;
 
-public class CsvPortfolioLoader {
+public class CsvAssetsLoader {
     readonly string _portfolioCsvPath;
 
-    public CsvPortfolioLoader(string portfolioCsvPath) {
+    public CsvAssetsLoader(string portfolioCsvPath) {
         _portfolioCsvPath = portfolioCsvPath;
     }
     

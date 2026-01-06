@@ -3,17 +3,17 @@ namespace Portfolio;
 public class Portfolio
 {
     private readonly PortfolioDisplay _portfolioDisplay;
-    readonly CsvPortfolioLoader _portfolioLoader;
+    readonly CsvAssetsLoader _assetsLoader;
 
-    public Portfolio(PortfolioDisplay portfolioDisplay, CsvPortfolioLoader portfolioLoader)
+    public Portfolio(PortfolioDisplay portfolioDisplay, CsvAssetsLoader assetsLoader)
     {
-        _portfolioLoader = portfolioLoader;
+        _assetsLoader = assetsLoader;
         _portfolioDisplay = portfolioDisplay;
     }
     
     public void ComputePortfolioValue()
     {
-        var assets = _portfolioLoader.GetAllAssets(DateTime.Now);
+        var assets = _assetsLoader.GetAllAssets(DateTime.Now);
         if (assets.ContainsUnicorn) {
             _portfolioDisplay.DisplayUnicorn(assets.GetFirstUnicorn());
         }
