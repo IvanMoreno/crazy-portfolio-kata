@@ -19,8 +19,6 @@ public class Portfolio
     // Special Case
     public void ComputePortfolioValue()
     {
-        var portfolioValue = new AssetValue(0);
-
         var allAssets = GetAllAssets();
         if (allAssets.Any(asset => asset.GetValue(DateTime.Now).IsPriceless)) {
             var pricelessAsset = allAssets.First(asset => asset.GetValue(DateTime.Now).IsPriceless);
@@ -30,11 +28,10 @@ public class Portfolio
             return;
         }
 
-        foreach (var asset in allAssets) {
-            portfolioValue = portfolioValue.Add(asset.GetValue(DateTime.Now));
-        }
+        var result = new AssetValue(0);
+        result = allAssets.Aggregate(result, (current, asset) => current.Add(asset.GetValue(DateTime.Now)));
 
-        _portfolioDisplay.Display(portfolioValue);
+        _portfolioDisplay.Display(result);
     }
 
     IEnumerable<Asset> GetAllAssets() {
