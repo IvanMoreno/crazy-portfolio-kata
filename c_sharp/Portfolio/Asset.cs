@@ -74,21 +74,6 @@ public class Asset
 
 // Data Class
 // Speculative Generality
-public abstract class Value
-{
-    protected readonly int _value;
-
-    protected Value(int value)
-    {
-        _value = value;
-    }
-
-    public int Get()
-    {
-        return _value;
-    }
-}
-
 public class MeasurableValue
 {
     readonly int _value;
