@@ -13,12 +13,12 @@ public class Portfolio
     
     public void ComputePortfolioValue()
     {
-        var allAssets = _portfolioLoader.GetAllAssets();
-        if (allAssets.Any(IsUnicorn)) {
-            _portfolioDisplay.DisplayUnicorn(allAssets.First(IsUnicorn));
+        var assets = _portfolioLoader.GetAllAssets(DateTime.Now);
+        if (assets.ContainsUnicorn) {
+            _portfolioDisplay.DisplayUnicorn(assets.GetFirstUnicorn());
         }
         else {
-            _portfolioDisplay.Display(GetPortfolioValue(allAssets));
+            _portfolioDisplay.Display(assets.TotalValue());
         }
     }
 
