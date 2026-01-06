@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Globalization;
 
 namespace Portfolio;
@@ -29,6 +28,12 @@ public class CsvPortfolioLoader {
         var readText = File.ReadAllText(_portfolioCsvPath);
         var lines = readText.Split(Environment.NewLine);
         return lines.Select(Parse);
+    }
+    
+    public AssetsValuation GetAllAssets(DateTime now) {
+        var readText = File.ReadAllText(_portfolioCsvPath);
+        var lines = readText.Split(Environment.NewLine);
+        return new(lines.Select(Parse), now);
     }
 
     static Asset Parse(string line) {
