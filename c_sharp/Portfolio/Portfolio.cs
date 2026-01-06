@@ -15,10 +15,10 @@ public class Portfolio
     {
         var assets = _assetsLoader.GetAllAssets(DateTime.Now);
         if (assets.ContainsUnicorn) {
-            _display.DisplayUnicorn(assets.GetFirstUnicorn());
+            _display.ShowUnicorn(assets.GetFirstUnicorn());
         }
         else {
-            _display.Display(assets.TotalValue());
+            _display.ShowPortfolioValue(assets.TotalValue());
         }
     }
 }

@@ -6,11 +6,11 @@ public class SpyDisplay : PortfolioDisplay {
     public AssetValue LastPortfolioValue { get; private set; }
     public bool DisplayedUnicorn { get; private set; }
     
-    public void Display(AssetValue portfolioValue) {
+    public void ShowPortfolioValue(AssetValue portfolioValue) {
         LastPortfolioValue = portfolioValue;
     }
 
-    public void DisplayUnicorn(Asset asset) {
+    public void ShowUnicorn(Asset asset) {
         DisplayedUnicorn = true;
     }
 }

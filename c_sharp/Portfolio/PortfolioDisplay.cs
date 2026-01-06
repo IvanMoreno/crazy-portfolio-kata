@@ -1,6 +1,6 @@
 namespace Portfolio;
 
 public interface PortfolioDisplay {
-    void Display(AssetValue portfolioValue);
-    void DisplayUnicorn(Asset asset);
+    void ShowPortfolioValue(AssetValue portfolioValue);
+    void ShowUnicorn(Asset asset);
 }
