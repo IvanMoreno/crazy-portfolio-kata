@@ -26,7 +26,7 @@ public class Asset
     // Long Method
     public AssetValue GetValue(DateTime now) {
         if (Description == "Unicorn") {
-            return new AssetValue(int.MaxValue, true);
+            return new AssetValue(int.MaxValue);
         }
         if (Description == "French Wine") {
             if (Date.Subtract(now).TotalDays < 0) {
@@ -76,12 +76,11 @@ public class Asset
 public class AssetValue
 {
     readonly int _value;
-    public readonly bool IsPriceless;
+    public bool IsPriceless => _value >= int.MaxValue;
 
-    public AssetValue(int value, bool isPriceless = false)
+    public AssetValue(int value)
     {
         _value = value;
-        IsPriceless = isPriceless;
     }
 
     public int Get()
