@@ -1,3 +1,4 @@
+using System.Xml;
 using static System.Globalization.CultureInfo;
 
 namespace Portfolio;
@@ -20,17 +21,17 @@ public class Portfolio
     {
         var portfolioValue = new AssetValue(0);
 
-        foreach (var asset in GetAllAssets()) {
-            // Special case
-            var assetValue = asset.GetValue(DateTime.Now);
-            if (assetValue.IsPriceless) {
-                Console.WriteLine(
-                    "Portfolio is priceless because it got a unicorn on " +
-                    asset.Date.ToString(CurrentCulture) + "!!!!!");
-                return;
-            }
-            
-            portfolioValue = portfolioValue.Add(assetValue);
+        var allAssets = GetAllAssets();
+        if (allAssets.Any(asset => asset.GetValue(DateTime.Now).IsPriceless)) {
+            var pricelessAsset = allAssets.First(asset => asset.GetValue(DateTime.Now).IsPriceless);
+            Console.WriteLine(
+                "Portfolio is priceless because it got a unicorn on " +
+                pricelessAsset.Date.ToString(CurrentCulture) + "!!!!!");
+            return;
+        }
+
+        foreach (var asset in allAssets) {
+            portfolioValue = portfolioValue.Add(asset.GetValue(DateTime.Now));
         }
 
         _portfolioDisplay.Display(portfolioValue);
