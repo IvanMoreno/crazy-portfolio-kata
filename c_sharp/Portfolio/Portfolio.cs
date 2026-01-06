@@ -19,14 +19,15 @@ public class Portfolio
     public void ComputePortfolioValue()
     {
         var allAssets = GetAllAssets();
-        if (allAssets.Any(asset => asset.GetValue(DateTime.Now).IsPriceless)) {
-            var pricelessAsset = allAssets.First(asset => asset.GetValue(DateTime.Now).IsPriceless);
-            _portfolioDisplay.DisplayUnicorn(pricelessAsset);
+        if (allAssets.Any(IsUnicorn)) {
+            _portfolioDisplay.DisplayUnicorn(allAssets.First(IsUnicorn));
             return;
         }
 
         _portfolioDisplay.Display(GetPortfolioValue(allAssets));
     }
+
+    static bool IsUnicorn(Asset asset) => asset.GetValue(DateTime.Now).IsPriceless;
 
     static AssetValue GetPortfolioValue(IEnumerable<Asset> allAssets) {
         return allAssets.Aggregate(new AssetValue(0), (current, asset) => current.Add(asset.GetValue(DateTime.Now)));
