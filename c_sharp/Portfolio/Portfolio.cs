@@ -28,9 +28,11 @@ public class Portfolio
             return;
         }
 
-        var result = allAssets.Aggregate(new AssetValue(0), (current, asset) => current.Add(asset.GetValue(DateTime.Now)));
+        _portfolioDisplay.Display(GetPortfolioValue(allAssets));
+    }
 
-        _portfolioDisplay.Display(result);
+    static AssetValue GetPortfolioValue(IEnumerable<Asset> allAssets) {
+        return allAssets.Aggregate(new AssetValue(0), (current, asset) => current.Add(asset.GetValue(DateTime.Now)));
     }
 
     IEnumerable<Asset> GetAllAssets() {
