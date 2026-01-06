@@ -72,7 +72,6 @@ public class Asset
     }
 }
 
-// Data Class
 public class AssetValue
 {
     readonly int _value;
