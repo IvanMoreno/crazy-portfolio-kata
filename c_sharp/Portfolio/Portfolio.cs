@@ -21,10 +21,10 @@ public class Portfolio
         var allAssets = GetAllAssets();
         if (allAssets.Any(IsUnicorn)) {
             _portfolioDisplay.DisplayUnicorn(allAssets.First(IsUnicorn));
-            return;
         }
-
-        _portfolioDisplay.Display(GetPortfolioValue(allAssets));
+        else {
+            _portfolioDisplay.Display(GetPortfolioValue(allAssets));
+        }
     }
 
     static bool IsUnicorn(Asset asset) => asset.GetValue(DateTime.Now).IsPriceless;
