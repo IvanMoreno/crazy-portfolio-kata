@@ -105,7 +105,7 @@ public class MeasurableValue : Value
     }
 }
 
-public class PricelessValue : Value
+public class PricelessValue : MeasurableValue
 {
     public PricelessValue() : base(int.MaxValue)
     {
