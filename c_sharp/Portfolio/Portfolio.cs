@@ -13,9 +13,6 @@ public class Portfolio
         _portfolioDisplay = portfolioDisplay;
     }
     
-    // Divergent change
-    // Feature Envy
-    // Special Case
     public void ComputePortfolioValue()
     {
         var allAssets = GetAllAssets();
