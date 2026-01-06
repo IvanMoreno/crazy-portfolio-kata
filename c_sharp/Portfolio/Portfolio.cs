@@ -21,10 +21,4 @@ public class Portfolio
             _portfolioDisplay.Display(assets.TotalValue());
         }
     }
-
-    static bool IsUnicorn(Asset asset) => asset.GetValue(DateTime.Now).IsUnicorn;
-
-    static AssetValue GetPortfolioValue(IEnumerable<Asset> allAssets) {
-        return allAssets.Aggregate(new AssetValue(0), (current, asset) => current.Add(asset.GetValue(DateTime.Now)));
-    }
 }

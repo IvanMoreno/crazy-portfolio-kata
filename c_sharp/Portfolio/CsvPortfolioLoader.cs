@@ -23,12 +23,6 @@ public class CsvPortfolioLoader {
     public CsvPortfolioLoader(string portfolioCsvPath) {
         _portfolioCsvPath = portfolioCsvPath;
     }
-
-    public IEnumerable<Asset> GetAllAssets() {
-        var readText = File.ReadAllText(_portfolioCsvPath);
-        var lines = readText.Split(Environment.NewLine);
-        return lines.Select(Parse);
-    }
     
     public AssetsValuation GetAllAssets(DateTime now) {
         var readText = File.ReadAllText(_portfolioCsvPath);
