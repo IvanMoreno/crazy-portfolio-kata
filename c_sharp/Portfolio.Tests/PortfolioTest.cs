@@ -21,7 +21,7 @@ public class PortfolioTest
     public void ComputeValue()
     {
         var spyDisplay = new SpyDisplay();
-        var app = new Portfolio(spyDisplay, new CsvAssetsLoader("../../../portfolio_no_unicorn.csv"));
+        var app = new Portfolio(spyDisplay, new CsvAssetsLoader("../../../portfolio_no_unicorn.csv"), new RealtimeClock());
 
         app.ComputePortfolioValue();
 
@@ -31,7 +31,7 @@ public class PortfolioTest
     [Test]
     public void ComputeValue_FailsWhenUnicornAppears() {
         var spyDisplay = new SpyDisplay();
-        var app = new Portfolio(spyDisplay, new CsvAssetsLoader("../../../portfolio.csv"));
+        var app = new Portfolio(spyDisplay, new CsvAssetsLoader("../../../portfolio.csv"), new RealtimeClock());
 
         app.ComputePortfolioValue();
 
