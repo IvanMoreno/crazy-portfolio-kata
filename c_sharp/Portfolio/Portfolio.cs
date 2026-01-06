@@ -2,23 +2,23 @@ namespace Portfolio;
 
 public class Portfolio
 {
-    private readonly PortfolioDisplay _portfolioDisplay;
+    private readonly PortfolioDisplay _display;
     readonly CsvAssetsLoader _assetsLoader;
 
-    public Portfolio(PortfolioDisplay portfolioDisplay, CsvAssetsLoader assetsLoader)
+    public Portfolio(PortfolioDisplay display, CsvAssetsLoader assetsLoader)
     {
         _assetsLoader = assetsLoader;
-        _portfolioDisplay = portfolioDisplay;
+        _display = display;
     }
     
     public void ComputePortfolioValue()
     {
         var assets = _assetsLoader.GetAllAssets(DateTime.Now);
         if (assets.ContainsUnicorn) {
-            _portfolioDisplay.DisplayUnicorn(assets.GetFirstUnicorn());
+            _display.DisplayUnicorn(assets.GetFirstUnicorn());
         }
         else {
-            _portfolioDisplay.Display(assets.TotalValue());
+            _display.Display(assets.TotalValue());
         }
     }
 }
