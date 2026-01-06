@@ -24,17 +24,17 @@ public class CsvPortfolioLoader {
 public class Portfolio
 {
     private readonly PortfolioDisplay _portfolioDisplay;
-    readonly CsvPortfolioLoader csvPortfolioLoader;
+    readonly CsvPortfolioLoader portfolioLoader;
 
-    public Portfolio(string portfolioCsvPath, PortfolioDisplay portfolioDisplay)
+    public Portfolio(string portfolioCsvPath, PortfolioDisplay portfolioDisplay, CsvPortfolioLoader portfolioLoader)
     {
-        csvPortfolioLoader = new CsvPortfolioLoader(portfolioCsvPath);
+        this.portfolioLoader = portfolioLoader;
         _portfolioDisplay = portfolioDisplay;
     }
     
     public void ComputePortfolioValue()
     {
-        var allAssets = csvPortfolioLoader.GetAllAssets();
+        var allAssets = portfolioLoader.GetAllAssets();
         if (allAssets.Any(IsUnicorn)) {
             _portfolioDisplay.DisplayUnicorn(allAssets.First(IsUnicorn));
         }
