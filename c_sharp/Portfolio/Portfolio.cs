@@ -18,7 +18,7 @@ public class Portfolio
     // Special Case
     public void ComputePortfolioValue()
     {
-        var portfolioValue = new MeasurableValue(0);
+        var portfolioValue = new AssetValue(0);
 
         foreach (var asset in GetAllAssets()) {
             // Special case
@@ -44,6 +44,6 @@ public class Portfolio
 
     static Asset Parse(string line) {
         var columns = line.Split(",");
-        return new Asset(columns[0], DateTime.Parse(columns[1], CurrentCulture), new MeasurableValue(int.Parse(columns[2])));
+        return new Asset(columns[0], DateTime.Parse(columns[1], CurrentCulture), new AssetValue(int.Parse(columns[2])));
     }
 }

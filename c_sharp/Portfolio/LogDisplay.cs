@@ -1,7 +1,7 @@
 namespace Portfolio;
 
 public class LogDisplay : PortfolioDisplay {
-    public void Display(MeasurableValue portfolioValue) {
+    public void Display(AssetValue portfolioValue) {
         Console.WriteLine(portfolioValue);
     }
 }

@@ -1,5 +1,5 @@
 namespace Portfolio;
 
 public interface PortfolioDisplay {
-    void Display(MeasurableValue portfolioValue);
+    void Display(AssetValue portfolioValue);
 }

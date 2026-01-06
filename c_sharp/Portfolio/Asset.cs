@@ -7,7 +7,7 @@ public class Asset
 {
     private readonly DateTime _date;
 
-    public Asset(string description, DateTime date, MeasurableValue value)
+    public Asset(string description, DateTime date, AssetValue value)
     {
         Description = description;
         _date = date;
@@ -18,39 +18,39 @@ public class Asset
 
     public DateTime Date => _date.Date;
 
-    public MeasurableValue Value { get; set; }
+    public AssetValue Value { get; set; }
 
     // Complicated boolean expression
     // Magic literal
     // Duplicated code
     // Long Method
-    public MeasurableValue GetValue(DateTime now) {
+    public AssetValue GetValue(DateTime now) {
         if (Description == "Unicorn") {
             return new PricelessValue();
         }
         if (Description == "French Wine") {
             if (Date.Subtract(now).TotalDays < 0) {
                 if (Value.Get() < 200) 
-                    return new MeasurableValue(Value.Get() + 20);
+                    return new AssetValue(Value.Get() + 20);
             }
             else {
                 if (Value.Get() < 200) 
-                    return new MeasurableValue(Value.Get() + 10);
+                    return new AssetValue(Value.Get() + 10);
             }
         }
         else if (Description == "Lottery Prediction") {
             if (Date.Subtract(now).TotalDays < 0) {
-                return new MeasurableValue(Value.Get() - Value.Get());
+                return new AssetValue(Value.Get() - Value.Get());
             }
         
             if (Value.Get() < 800) {
-                var result = new MeasurableValue(Value.Get() + 5);
+                var result = new AssetValue(Value.Get() + 5);
         
                 if (Date.Subtract(now).TotalDays < 11 && result.Get() < 800) 
-                    result = new MeasurableValue(result.Get() + 20);
+                    result = new AssetValue(result.Get() + 20);
         
                 if (Date.Subtract(now).TotalDays < 6 && result.Get() < 800) 
-                    result = new MeasurableValue(result.Get() + 100);
+                    result = new AssetValue(result.Get() + 100);
         
                 return result;
             }
@@ -58,12 +58,12 @@ public class Asset
         else {
             if (Date.Subtract(now).TotalDays < 0) {
                 if (Value.Get() > 0) {
-                    return new MeasurableValue(Value.Get() - 20);
+                    return new AssetValue(Value.Get() - 20);
                 }
             }
             else {
                 if (Value.Get() > 0.0) {
-                    return new MeasurableValue(Value.Get() - 10);
+                    return new AssetValue(Value.Get() - 10);
                 }
             }
         }
@@ -74,11 +74,11 @@ public class Asset
 
 // Data Class
 // Speculative Generality
-public class MeasurableValue
+public class AssetValue
 {
     readonly int _value;
 
-    public MeasurableValue(int value)
+    public AssetValue(int value)
     {
         _value = value;
     }
@@ -88,8 +88,8 @@ public class MeasurableValue
         return _value;
     }
 
-    public MeasurableValue Add(MeasurableValue addend) {
-        return new MeasurableValue(Get() + addend.Get());
+    public AssetValue Add(AssetValue addend) {
+        return new AssetValue(Get() + addend.Get());
     }
 
     public override string ToString()
@@ -98,7 +98,7 @@ public class MeasurableValue
     }
 }
 
-public class PricelessValue : MeasurableValue
+public class PricelessValue : AssetValue
 {
     public PricelessValue() : base(int.MaxValue)
     {

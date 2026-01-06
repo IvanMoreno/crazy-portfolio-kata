@@ -3,9 +3,9 @@ using NUnit.Framework;
 namespace Portfolio.Tests;
 
 public class SpyDisplay : PortfolioDisplay {
-    public MeasurableValue LastPortfolioValue { get; private set; }
+    public AssetValue LastPortfolioValue { get; private set; }
     
-    public void Display(MeasurableValue portfolioValue) {
+    public void Display(AssetValue portfolioValue) {
         LastPortfolioValue = portfolioValue;
     }
 }
