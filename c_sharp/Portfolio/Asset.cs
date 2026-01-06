@@ -7,7 +7,7 @@ public class Asset
 {
     private readonly DateTime _date;
 
-    public Asset(string description, DateTime date, Value value)
+    public Asset(string description, DateTime date, MeasurableValue value)
     {
         Description = description;
         _date = date;
@@ -18,13 +18,13 @@ public class Asset
 
     public DateTime Date => _date.Date;
 
-    public Value Value { get; set; }
+    public MeasurableValue Value { get; set; }
 
     // Complicated boolean expression
     // Magic literal
     // Duplicated code
     // Long Method
-    public Value GetValue(DateTime now) {
+    public MeasurableValue GetValue(DateTime now) {
         if (Description == "Unicorn") {
             return new PricelessValue();
         }
@@ -89,19 +89,27 @@ public abstract class Value
     }
 }
 
-public class MeasurableValue : Value
+public class MeasurableValue
 {
-    public MeasurableValue(int value) : base(value)
+    readonly int _value;
+
+    public MeasurableValue(int value)
     {
+        _value = value;
+    }
+
+    public int Get()
+    {
+        return _value;
+    }
+
+    public MeasurableValue Add(MeasurableValue addend) {
+        return new MeasurableValue(Get() + addend.Get());
     }
 
     public override string ToString()
     {
         return _value.ToString(CultureInfo.CurrentCulture);
-    }
-
-    public MeasurableValue Add(Value addend) {
-        return new MeasurableValue(Get() + addend.Get());
     }
 }
 
