@@ -99,10 +99,3 @@ public class AssetValue
         return _value.ToString(CultureInfo.CurrentCulture);
     }
 }
-
-public class PricelessValue : AssetValue
-{
-    public PricelessValue() : base(int.MaxValue, true)
-    {
-    }
-}
