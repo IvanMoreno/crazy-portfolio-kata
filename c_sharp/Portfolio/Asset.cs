@@ -87,10 +87,6 @@ public abstract class Value
     {
         return _value;
     }
-
-    public MeasurableValue Add(Value addend) {
-        return new MeasurableValue(Get() + addend.Get());
-    }
 }
 
 public class MeasurableValue : Value
@@ -102,6 +98,10 @@ public class MeasurableValue : Value
     public override string ToString()
     {
         return _value.ToString(CultureInfo.CurrentCulture);
+    }
+
+    public MeasurableValue Add(Value addend) {
+        return new MeasurableValue(Get() + addend.Get());
     }
 }
 
