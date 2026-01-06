@@ -1,4 +1,3 @@
-using System.Xml;
 using static System.Globalization.CultureInfo;
 
 namespace Portfolio;
@@ -22,9 +21,7 @@ public class Portfolio
         var allAssets = GetAllAssets();
         if (allAssets.Any(asset => asset.GetValue(DateTime.Now).IsPriceless)) {
             var pricelessAsset = allAssets.First(asset => asset.GetValue(DateTime.Now).IsPriceless);
-            Console.WriteLine(
-                "Portfolio is priceless because it got a unicorn on " +
-                pricelessAsset.Date.ToString(CurrentCulture) + "!!!!!");
+            _portfolioDisplay.DisplayUnicorn(pricelessAsset);
             return;
         }
 

@@ -4,9 +4,14 @@ namespace Portfolio.Tests;
 
 public class SpyDisplay : PortfolioDisplay {
     public AssetValue LastPortfolioValue { get; private set; }
+    public bool DisplayedUnicorn { get; private set; }
     
     public void Display(AssetValue portfolioValue) {
         LastPortfolioValue = portfolioValue;
+    }
+
+    public void DisplayUnicorn(Asset asset) {
+        DisplayedUnicorn = true;
     }
 }
 
@@ -30,6 +35,6 @@ public class PortfolioTest
 
         app.ComputePortfolioValue();
 
-        Assert.That(spyDisplay.LastPortfolioValue, Is.Null);
+        Assert.That(spyDisplay.DisplayedUnicorn, Is.True);
     }
 }
