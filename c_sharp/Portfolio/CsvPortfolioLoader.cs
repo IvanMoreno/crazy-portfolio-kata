@@ -15,7 +15,7 @@ public class AssetsValuation {
     
     public Asset GetFirstUnicorn() => assets.First(IsUnicorn);
     public AssetValue TotalValue() => assets.Aggregate(new AssetValue(0), (current, asset) => current.Add(asset.GetValue(date)));
-    bool IsUnicorn(Asset asset) => asset.GetValue(date).IsPriceless;
+    bool IsUnicorn(Asset asset) => asset.GetValue(date).IsUnicorn;
 }
 
 public class CsvPortfolioLoader {

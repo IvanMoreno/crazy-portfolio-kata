@@ -75,7 +75,7 @@ public class Asset
 public class AssetValue
 {
     readonly int _value;
-    public bool IsPriceless => _value >= int.MaxValue;
+    public bool IsUnicorn => _value >= int.MaxValue;
 
     public AssetValue(int value)
     {
