@@ -19,7 +19,7 @@ public class Asset
 
     public Value Value { get; set; }
 
-    public void GetValue(DateTime now) {
+    public Value GetValue(DateTime now) {
         if (Date.Subtract(now).TotalDays < 0)
         {
             if (Description != "French Wine")
@@ -84,6 +84,8 @@ public class Asset
                 }
             }
         }
+
+        return Value;
     }
 
     public bool IsUnicorn(DateTime now) {
