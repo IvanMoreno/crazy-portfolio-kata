@@ -2,13 +2,26 @@ using static System.Globalization.CultureInfo;
 
 namespace Portfolio;
 
+public class LogDisplay {
+    public void ShowPortfolio(MeasurableValue portfolioValue) {
+        Console.WriteLine(portfolioValue);
+    }
+
+    public void ShowUnicorn(Asset asset) {
+        Console.WriteLine(
+            "Portfolio is priceless because it got a unicorn on " +
+            asset.Date.ToString(CurrentCulture) + "!!!!!");
+    }
+}
+
 public class Portfolio
 {
     private readonly string _portfolioCsvPath;
+    readonly LogDisplay logDisplay;
 
-    public Portfolio(string portfolioCsvPath)
-    {
+    public Portfolio(string portfolioCsvPath) {
         _portfolioCsvPath = portfolioCsvPath;
+        logDisplay = new LogDisplay();
     }
 
     public void ComputePortfolioValue()
@@ -39,9 +52,7 @@ public class Portfolio
                             }
                             else
                             {
-                                Console.WriteLine(
-                                    "Portfolio is priceless because it got a unicorn on " +
-                                    asset.Date.ToString(CurrentCulture) + "!!!!!");
+                                logDisplay.ShowUnicorn(asset);
                                 return;
                             }
                         }
@@ -68,19 +79,14 @@ public class Portfolio
                         }
                         else
                         {
-                            Console.WriteLine(
-                                "Portfolio is priceless because it got a unicorn on " +
-                                asset.Date.ToString(CurrentCulture) + "!!!!!");
+                            logDisplay.ShowUnicorn(asset);
                             return;
                         }
                     }
                     else
                     {
-                        if (asset.Description == "Unicorn")
-                        {
-                            Console.WriteLine(
-                                "Portfolio is priceless because it got a unicorn on " +
-                                asset.Date.ToString(CurrentCulture) + "!!!!!");
+                        if (asset.Description == "Unicorn") {
+                            logDisplay.ShowUnicorn(asset);
                             return;
                         }
                     }
@@ -112,6 +118,6 @@ public class Portfolio
             portfolioValue = new MeasurableValue(portfolioValue.Get() + asset.Value.Get());
         }
 
-        Console.WriteLine(portfolioValue);
+        logDisplay.ShowPortfolio(portfolioValue);
     }
 }
