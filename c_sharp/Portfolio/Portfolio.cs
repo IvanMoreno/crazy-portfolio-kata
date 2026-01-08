@@ -26,22 +26,17 @@ public class CsvPortfolioRepository {
         _portfolioCsvPath = portfolioCsvPath;
     }
 
-    public List<Asset> GetAssets() {
+    public IEnumerable<Asset> GetAssets() {
         var readText = File.ReadAllText(_portfolioCsvPath);
         var lines = readText.Split(Environment.NewLine);
-        var assets = new List<Asset>();
+        return lines.Select(Parse);
+    }
 
-        foreach (var line in lines)
-        {
-            var columns = line.Split(",");
-            var asset = new Asset(columns[0],
-                DateTime.Parse(columns[1], CurrentCulture),
-                columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
-            
-            assets.Add(asset);
-        }
-
-        return assets;
+    static Asset Parse(string line) {
+        var columns = line.Split(",");
+        return new Asset(columns[0],
+            DateTime.Parse(columns[1], CurrentCulture),
+            columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
     }
 }
 
