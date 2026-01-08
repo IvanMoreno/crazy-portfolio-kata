@@ -33,43 +33,35 @@ public class Asset
     }
 
     Value NonExpiredValue(DateTime now) {
-        if (Description != "French Wine" && Description != "Lottery Prediction")
-        {
-            if (Value.Get() > 0.0)
-            {
-                if (Description != "Unicorn") {
-                    return new MeasurableValue(Value.Get() - 10);
-                }
+        if (Description == "Lottery Prediction") {
+            if (Value.Get() < 800) {
+                var baseValue = new MeasurableValue(Value.Get() + 5);
+
+                if (Date.Subtract(now).TotalDays < 11)
+                    if (baseValue.Get() < 800)
+                        baseValue = new MeasurableValue(baseValue.Get() + 20);
+
+                if (Date.Subtract(now).TotalDays < 6)
+                    if (baseValue.Get() < 800)
+                        baseValue = new MeasurableValue(baseValue.Get() + 100);
+
+                return baseValue;
             }
-            else
-            {
-                if (Description == "Unicorn") {
-                }
-            }
+
+            return Value;
         }
-        else
-        {
-            if (Description == "Lottery Prediction")
-            {
-                if (Value.Get() < 800)
-                {
-                    var baseValue = new MeasurableValue(Value.Get() + 5);
 
-                    if (Date.Subtract(now).TotalDays < 11)
-                        if (baseValue.Get() < 800)
-                            baseValue = new MeasurableValue(baseValue.Get() + 20);
+        if (Description == "French Wine") {
+            if (Value.Get() < 200)
+                return new MeasurableValue(Value.Get() + 10);
+        }
 
-                    if (Date.Subtract(now).TotalDays < 6)
-                        if (baseValue.Get() < 800)
-                            baseValue = new MeasurableValue(baseValue.Get() + 100);
-
-                    return baseValue;
-                }
-            }
-            else
-            {
-                if (Value.Get() < 200) 
-                    return new MeasurableValue(Value.Get() + 10);
+        if (Description == "Unicorn") {
+            // Nothing
+        }
+        else {
+            if (Value.Get() > 0.0) {
+                return new MeasurableValue(Value.Get() - 10);
             }
         }
 
