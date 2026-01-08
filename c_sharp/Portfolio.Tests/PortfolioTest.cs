@@ -25,5 +25,6 @@ public class PortfolioTest
         app.ComputePortfolioValue();
 
         Assert.That(display.UnicornAsset, Is.Not.Null);
+        Assert.That(display.PortfolioValue, Is.Null);
     }
 }
