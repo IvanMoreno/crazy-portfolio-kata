@@ -37,6 +37,77 @@ public class Asset
     public override string ToString() {
         return $"{nameof(_date)}: {_date}, {nameof(Description)}: {Description}, {nameof(Value)}: {Value}";
     }
+
+    public void GetValue(DateTime now) {
+        if (this.Date.Subtract(now).TotalDays < 0)
+        {
+            if (this.Description != "French Wine")
+            {
+                if (this.Description != "Lottery Prediction")
+                {
+                    if (this.Value.Get() > 0)
+                    {
+                        if (this.Description != "Unicorn")
+                        {
+                            this.Value = new MeasurableValue(this.Value.Get() - 20);
+                        }
+                        else {
+                        }
+                    }
+                }
+                else
+                {
+                    this.Value = new MeasurableValue(this.Value.Get() - this.Value.Get());
+                }
+            }
+            else
+            {
+                if (this.Value.Get() < 200) this.Value = new MeasurableValue(this.Value.Get() + 20);
+            }
+        }
+        else
+        {
+            if (this.Description != "French Wine" && this.Description != "Lottery Prediction")
+            {
+                if (this.Value.Get() > 0.0)
+                {
+                    if (this.Description != "Unicorn")
+                    {
+                        this.Value = new MeasurableValue(this.Value.Get() - 10);
+                    }
+                    else {
+                    }
+                }
+                else
+                {
+                    if (this.Description == "Unicorn") {
+                    }
+                }
+            }
+            else
+            {
+                if (this.Description == "Lottery Prediction")
+                {
+                    if (this.Value.Get() < 800)
+                    {
+                        this.Value = new MeasurableValue(this.Value.Get() + 5);
+
+                        if (this.Date.Subtract(now).TotalDays < 11)
+                            if (this.Value.Get() < 800)
+                                this.Value = new MeasurableValue(this.Value.Get() + 20);
+
+                        if (this.Date.Subtract(now).TotalDays < 6)
+                            if (this.Value.Get() < 800)
+                                this.Value = new MeasurableValue(this.Value.Get() + 100);
+                    }
+                }
+                else
+                {
+                    if (this.Value.Get() < 200) this.Value = new MeasurableValue(this.Value.Get() + 10);
+                }
+            }
+        }
+    }
 }
 
 public abstract class Value
