@@ -22,11 +22,11 @@ public class LogDisplay : Display {
 public class Portfolio
 {
     private readonly string _portfolioCsvPath;
-    readonly LogDisplay logDisplay;
+    readonly Display _display;
 
-    public Portfolio(string portfolioCsvPath) {
+    public Portfolio(string portfolioCsvPath, Display display) {
         _portfolioCsvPath = portfolioCsvPath;
-        logDisplay = new LogDisplay();
+        _display = display;
     }
 
     public void ComputePortfolioValue()
@@ -57,7 +57,7 @@ public class Portfolio
                             }
                             else
                             {
-                                logDisplay.ShowUnicorn(asset);
+                                _display.ShowUnicorn(asset);
                                 return;
                             }
                         }
@@ -84,14 +84,14 @@ public class Portfolio
                         }
                         else
                         {
-                            logDisplay.ShowUnicorn(asset);
+                            _display.ShowUnicorn(asset);
                             return;
                         }
                     }
                     else
                     {
                         if (asset.Description == "Unicorn") {
-                            logDisplay.ShowUnicorn(asset);
+                            _display.ShowUnicorn(asset);
                             return;
                         }
                     }
@@ -123,6 +123,6 @@ public class Portfolio
             portfolioValue = new MeasurableValue(portfolioValue.Get() + asset.Value.Get());
         }
 
-        logDisplay.ShowPortfolio(portfolioValue);
+        _display.ShowPortfolio(portfolioValue);
     }
 }
