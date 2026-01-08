@@ -29,7 +29,7 @@ public class Portfolio
         _display.ShowPortfolio(portfolioValue);
     }
 
-    bool GetValue(Asset asset, DateTime now) {
+    void GetValue(Asset asset, DateTime now) {
         if (asset.Date.Subtract(now).TotalDays < 0)
         {
             if (asset.Description != "French Wine")
@@ -44,7 +44,7 @@ public class Portfolio
                         }
                         else {
                             _display.ShowUnicorn(asset);
-                            return true;
+                            return;
                         }
                     }
                 }
@@ -70,14 +70,14 @@ public class Portfolio
                     }
                     else {
                         _display.ShowUnicorn(asset);
-                        return true;
+                        return;
                     }
                 }
                 else
                 {
                     if (asset.Description == "Unicorn") {
                         _display.ShowUnicorn(asset);
-                        return true;
+                        return;
                     }
                 }
             }
@@ -104,8 +104,6 @@ public class Portfolio
                 }
             }
         }
-
-        return false;
     }
     
     bool IsUnicorn(Asset asset, DateTime now) {
