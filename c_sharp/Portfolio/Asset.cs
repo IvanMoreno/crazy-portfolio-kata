@@ -39,17 +39,17 @@ public class Asset
     }
 
     public void GetValue(DateTime now) {
-        if (this.Date.Subtract(now).TotalDays < 0)
+        if (Date.Subtract(now).TotalDays < 0)
         {
-            if (this.Description != "French Wine")
+            if (Description != "French Wine")
             {
-                if (this.Description != "Lottery Prediction")
+                if (Description != "Lottery Prediction")
                 {
-                    if (this.Value.Get() > 0)
+                    if (Value.Get() > 0)
                     {
-                        if (this.Description != "Unicorn")
+                        if (Description != "Unicorn")
                         {
-                            this.Value = new MeasurableValue(this.Value.Get() - 20);
+                            Value = new MeasurableValue(Value.Get() - 20);
                         }
                         else {
                         }
@@ -57,53 +57,53 @@ public class Asset
                 }
                 else
                 {
-                    this.Value = new MeasurableValue(this.Value.Get() - this.Value.Get());
+                    Value = new MeasurableValue(Value.Get() - Value.Get());
                 }
             }
             else
             {
-                if (this.Value.Get() < 200) this.Value = new MeasurableValue(this.Value.Get() + 20);
+                if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 20);
             }
         }
         else
         {
-            if (this.Description != "French Wine" && this.Description != "Lottery Prediction")
+            if (Description != "French Wine" && Description != "Lottery Prediction")
             {
-                if (this.Value.Get() > 0.0)
+                if (Value.Get() > 0.0)
                 {
-                    if (this.Description != "Unicorn")
+                    if (Description != "Unicorn")
                     {
-                        this.Value = new MeasurableValue(this.Value.Get() - 10);
+                        Value = new MeasurableValue(Value.Get() - 10);
                     }
                     else {
                     }
                 }
                 else
                 {
-                    if (this.Description == "Unicorn") {
+                    if (Description == "Unicorn") {
                     }
                 }
             }
             else
             {
-                if (this.Description == "Lottery Prediction")
+                if (Description == "Lottery Prediction")
                 {
-                    if (this.Value.Get() < 800)
+                    if (Value.Get() < 800)
                     {
-                        this.Value = new MeasurableValue(this.Value.Get() + 5);
+                        Value = new MeasurableValue(Value.Get() + 5);
 
-                        if (this.Date.Subtract(now).TotalDays < 11)
-                            if (this.Value.Get() < 800)
-                                this.Value = new MeasurableValue(this.Value.Get() + 20);
+                        if (Date.Subtract(now).TotalDays < 11)
+                            if (Value.Get() < 800)
+                                Value = new MeasurableValue(Value.Get() + 20);
 
-                        if (this.Date.Subtract(now).TotalDays < 6)
-                            if (this.Value.Get() < 800)
-                                this.Value = new MeasurableValue(this.Value.Get() + 100);
+                        if (Date.Subtract(now).TotalDays < 6)
+                            if (Value.Get() < 800)
+                                Value = new MeasurableValue(Value.Get() + 100);
                     }
                 }
                 else
                 {
-                    if (this.Value.Get() < 200) this.Value = new MeasurableValue(this.Value.Get() + 10);
+                    if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
                 }
             }
         }
