@@ -21,10 +21,10 @@ public class Asset
 
     public Value GetValue(DateTime now) {
         if (Expired(now)) {
-            return MeasurableValue();
+            return ExpiredValue();
         }
         else {
-            return BaseValue(now);
+            return NonExpiredValue(now);
         }
     }
 
@@ -32,7 +32,7 @@ public class Asset
         return Date.Subtract(now).TotalDays < 0;
     }
 
-    Value BaseValue(DateTime now) {
+    Value NonExpiredValue(DateTime now) {
         if (Description != "French Wine" && Description != "Lottery Prediction")
         {
             if (Value.Get() > 0.0)
@@ -76,7 +76,7 @@ public class Asset
         return Value;
     }
 
-    Value MeasurableValue() {
+    Value ExpiredValue() {
         if (Description != "French Wine")
         {
             if (Description != "Lottery Prediction")
