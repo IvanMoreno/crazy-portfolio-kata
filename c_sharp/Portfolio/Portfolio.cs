@@ -32,23 +32,9 @@ public class Portfolio
     public void ComputePortfolioValue()
     {
         var now = DateTime.Now;
-        var readText = File.ReadAllText(_portfolioCsvPath);
-        var lines = readText.Split(Environment.NewLine);
         var portfolioValue = new MeasurableValue(0);
-        var assets = new List<Asset>();
-
-        foreach (var line in lines)
-        {
-            var columns = line.Split(",");
-            var asset = new Asset(columns[0],
-                DateTime.Parse(columns[1], CurrentCulture),
-                columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
-            assets.Add(asset);
-
-            
-        }
-
-        foreach (var asset in assets) {
+        
+        foreach (var asset in GetAssets()) {
             if (asset.Date.Subtract(now).TotalDays < 0)
             {
                 if (asset.Description != "French Wine")
@@ -130,5 +116,23 @@ public class Portfolio
         }
 
         _display.ShowPortfolio(portfolioValue);
+    }
+
+    List<Asset> GetAssets() {
+        var readText = File.ReadAllText(_portfolioCsvPath);
+        var lines = readText.Split(Environment.NewLine);
+        var assets = new List<Asset>();
+
+        foreach (var line in lines)
+        {
+            var columns = line.Split(",");
+            var asset = new Asset(columns[0],
+                DateTime.Parse(columns[1], CurrentCulture),
+                columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
+            
+            assets.Add(asset);
+        }
+
+        return assets;
     }
 }
