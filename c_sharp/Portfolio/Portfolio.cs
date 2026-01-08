@@ -19,7 +19,11 @@ public class LogDisplay : Display {
     }
 }
 
-public class CsvPortfolioRepository {
+public interface PortfolioRepository {
+    IEnumerable<Asset> GetAssets();
+}
+
+public class CsvPortfolioRepository : PortfolioRepository {
     readonly string _portfolioCsvPath;
 
     public CsvPortfolioRepository(string portfolioCsvPath) {
