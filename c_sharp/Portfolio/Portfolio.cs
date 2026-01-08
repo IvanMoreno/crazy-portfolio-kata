@@ -1,48 +1,4 @@
-using static System.Globalization.CultureInfo;
-
 namespace Portfolio;
-
-public interface Display {
-    void ShowPortfolio(MeasurableValue portfolioValue);
-    void ShowUnicorn(Asset asset);
-}
-
-public class LogDisplay : Display {
-    public void ShowPortfolio(MeasurableValue portfolioValue) {
-        Console.WriteLine(portfolioValue);
-    }
-
-    public void ShowUnicorn(Asset asset) {
-        Console.WriteLine(
-            "Portfolio is priceless because it got a unicorn on " +
-            asset.Date.ToString(CurrentCulture) + "!!!!!");
-    }
-}
-
-public interface PortfolioRepository {
-    IEnumerable<Asset> GetAssets();
-}
-
-public class CsvPortfolioRepository : PortfolioRepository {
-    readonly string _portfolioCsvPath;
-
-    public CsvPortfolioRepository(string portfolioCsvPath) {
-        _portfolioCsvPath = portfolioCsvPath;
-    }
-
-    public IEnumerable<Asset> GetAssets() {
-        var readText = File.ReadAllText(_portfolioCsvPath);
-        var lines = readText.Split(Environment.NewLine);
-        return lines.Select(Parse);
-    }
-
-    static Asset Parse(string line) {
-        var columns = line.Split(",");
-        return new Asset(columns[0],
-            DateTime.Parse(columns[1], CurrentCulture),
-            columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
-    }
-}
 
 public class Portfolio
 {
