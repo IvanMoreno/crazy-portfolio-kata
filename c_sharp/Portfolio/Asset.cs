@@ -51,8 +51,6 @@ public class Asset
                         {
                             Value = new MeasurableValue(Value.Get() - 20);
                         }
-                        else {
-                        }
                     }
                 }
                 else
@@ -74,8 +72,6 @@ public class Asset
                     if (Description != "Unicorn")
                     {
                         Value = new MeasurableValue(Value.Get() - 10);
-                    }
-                    else {
                     }
                 }
                 else
