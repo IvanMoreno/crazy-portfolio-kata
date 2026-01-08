@@ -27,4 +27,14 @@ public class PortfolioTest
         Assert.That(display.UnicornAsset, Is.Not.Null);
         Assert.That(display.PortfolioValue, Is.Null);
     }
+
+    [Test]
+    public void ShowPortfolioValue() {
+        var display = new MockDisplay();
+        var app = new Portfolio("../../../portfolio_no_unicorn.csv", display);
+        
+        app.ComputePortfolioValue();
+        
+        Assert.That(display.PortfolioValue.Get(), Is.EqualTo(120));
+    }
 }
