@@ -47,10 +47,10 @@ public class CsvPortfolioRepository : PortfolioRepository {
 public class Portfolio
 {
     readonly Display _display;
-    readonly CsvPortfolioRepository csvPortfolioRepository;
+    readonly CsvPortfolioRepository portfolioRepository;
 
-    public Portfolio(string portfolioCsvPath, Display display) {
-        csvPortfolioRepository = new CsvPortfolioRepository(portfolioCsvPath);
+    public Portfolio(Display display, CsvPortfolioRepository portfolioRepository) {
+        this.portfolioRepository = portfolioRepository;
         _display = display;
     }
 
@@ -59,7 +59,7 @@ public class Portfolio
         var now = DateTime.Now;
         var portfolioValue = new MeasurableValue(0);
         
-        foreach (var asset in csvPortfolioRepository.GetAssets()) {
+        foreach (var asset in portfolioRepository.GetAssets()) {
             if (asset.Date.Subtract(now).TotalDays < 0)
             {
                 if (asset.Description != "French Wine")

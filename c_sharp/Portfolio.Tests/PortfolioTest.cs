@@ -20,7 +20,7 @@ public class PortfolioTest
     [Test]
     public void ShowUnicornAsset_IfExists() {
         var display = new MockDisplay();
-        var app = new Portfolio("../../../portfolio.csv", display);
+        var app = new Portfolio(display, new CsvPortfolioRepository("../../../portfolio.csv"));
 
         app.ComputePortfolioValue();
 
@@ -31,7 +31,7 @@ public class PortfolioTest
     [Test]
     public void ShowPortfolioValue() {
         var display = new MockDisplay();
-        var app = new Portfolio("../../../portfolio_no_unicorn.csv", display);
+        var app = new Portfolio(display, new CsvPortfolioRepository("../../../portfolio_no_unicorn.csv"));
         
         app.ComputePortfolioValue();
         
