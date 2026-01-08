@@ -35,6 +35,7 @@ public class Portfolio
         var readText = File.ReadAllText(_portfolioCsvPath);
         var lines = readText.Split(Environment.NewLine);
         var portfolioValue = new MeasurableValue(0);
+        var assets = new List<Asset>();
 
         foreach (var line in lines)
         {
@@ -42,7 +43,12 @@ public class Portfolio
             var asset = new Asset(columns[0],
                 DateTime.Parse(columns[1], CurrentCulture),
                 columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
+            assets.Add(asset);
 
+            
+        }
+
+        foreach (var asset in assets) {
             if (asset.Date.Subtract(now).TotalDays < 0)
             {
                 if (asset.Description != "French Wine")
