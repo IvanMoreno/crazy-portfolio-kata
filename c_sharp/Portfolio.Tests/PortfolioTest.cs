@@ -3,11 +3,15 @@ using NUnit.Framework;
 namespace Portfolio.Tests;
 
 public class MockDisplay : Display {
+    public MeasurableValue PortfolioValue { get; private set; }
+    public Asset UnicornAsset { get; private set; }
+
     public void ShowPortfolio(MeasurableValue portfolioValue) {
-        throw new NotImplementedException();
+        this.PortfolioValue = portfolioValue;
     }
+    
     public void ShowUnicorn(Asset asset) {
-        throw new NotImplementedException();
+        UnicornAsset = asset;
     }
 }
 
