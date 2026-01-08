@@ -44,6 +44,8 @@ public class Asset
                 if (Value.Get() < 200) 
                     return new MeasurableValue(Value.Get() + 20);
             }
+
+            return Value;
         }
         else
         {
@@ -87,9 +89,9 @@ public class Asset
                         return new MeasurableValue(Value.Get() + 10);
                 }
             }
+            
+            return Value;
         }
-
-        return Value;
     }
 
     public bool IsUnicorn(DateTime now) {
