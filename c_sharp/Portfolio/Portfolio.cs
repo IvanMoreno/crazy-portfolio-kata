@@ -20,8 +20,8 @@ public class Portfolio
                 _display.ShowUnicorn(asset);
                 return;
             }
-            
-            if (GetValue(asset, now)) return;
+
+            GetValue(asset, now);
 
             portfolioValue = new MeasurableValue(portfolioValue.Get() + asset.Value.Get());
         }
