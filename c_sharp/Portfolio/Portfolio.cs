@@ -19,13 +19,39 @@ public class LogDisplay : Display {
     }
 }
 
+public class CsvPortfolioRepository {
+    readonly string _portfolioCsvPath;
+
+    public CsvPortfolioRepository(string portfolioCsvPath) {
+        _portfolioCsvPath = portfolioCsvPath;
+    }
+
+    public List<Asset> GetAssets() {
+        var readText = File.ReadAllText(_portfolioCsvPath);
+        var lines = readText.Split(Environment.NewLine);
+        var assets = new List<Asset>();
+
+        foreach (var line in lines)
+        {
+            var columns = line.Split(",");
+            var asset = new Asset(columns[0],
+                DateTime.Parse(columns[1], CurrentCulture),
+                columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
+            
+            assets.Add(asset);
+        }
+
+        return assets;
+    }
+}
+
 public class Portfolio
 {
-    private readonly string _portfolioCsvPath;
     readonly Display _display;
+    readonly CsvPortfolioRepository csvPortfolioRepository;
 
     public Portfolio(string portfolioCsvPath, Display display) {
-        _portfolioCsvPath = portfolioCsvPath;
+        csvPortfolioRepository = new CsvPortfolioRepository(portfolioCsvPath);
         _display = display;
     }
 
@@ -34,7 +60,7 @@ public class Portfolio
         var now = DateTime.Now;
         var portfolioValue = new MeasurableValue(0);
         
-        foreach (var asset in GetAssets()) {
+        foreach (var asset in csvPortfolioRepository.GetAssets()) {
             if (asset.Date.Subtract(now).TotalDays < 0)
             {
                 if (asset.Description != "French Wine")
@@ -116,23 +142,5 @@ public class Portfolio
         }
 
         _display.ShowPortfolio(portfolioValue);
-    }
-
-    List<Asset> GetAssets() {
-        var readText = File.ReadAllText(_portfolioCsvPath);
-        var lines = readText.Split(Environment.NewLine);
-        var assets = new List<Asset>();
-
-        foreach (var line in lines)
-        {
-            var columns = line.Split(",");
-            var asset = new Asset(columns[0],
-                DateTime.Parse(columns[1], CurrentCulture),
-                columns[0] == "Unicorn" ? new PricelessValue() : new MeasurableValue(int.Parse(columns[2])));
-            
-            assets.Add(asset);
-        }
-
-        return assets;
     }
 }
