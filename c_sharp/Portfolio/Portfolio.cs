@@ -2,7 +2,12 @@ using static System.Globalization.CultureInfo;
 
 namespace Portfolio;
 
-public class LogDisplay {
+public interface Display {
+    void ShowPortfolio(MeasurableValue portfolioValue);
+    void ShowUnicorn(Asset asset);
+}
+
+public class LogDisplay : Display {
     public void ShowPortfolio(MeasurableValue portfolioValue) {
         Console.WriteLine(portfolioValue);
     }
