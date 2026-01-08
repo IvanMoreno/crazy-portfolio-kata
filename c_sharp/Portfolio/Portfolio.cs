@@ -16,6 +16,11 @@ public class Portfolio
         var portfolioValue = new MeasurableValue(0);
         
         foreach (var asset in _portfolioRepository.GetAssets()) {
+            if (IsUnicorn(asset, now)) {
+                _display.ShowUnicorn(asset);
+                return;
+            }
+            
             if (GetValue(asset, now)) return;
 
             portfolioValue = new MeasurableValue(portfolioValue.Get() + asset.Value.Get());
@@ -101,5 +106,17 @@ public class Portfolio
         }
 
         return false;
+    }
+    
+    bool IsUnicorn(Asset asset, DateTime now) {
+        if (asset.Description != "Unicorn") 
+            return false;
+        
+        if (asset.Date.Subtract(now).TotalDays < 0) {
+            return asset.Value.Get() > 0;
+        }
+
+        return true;
+
     }
 }
