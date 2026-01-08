@@ -2,8 +2,7 @@ using NUnit.Framework;
 
 namespace Portfolio.Tests;
 
-public class PortfolioTest
-{
+public class PortfolioTest {
     [Test]
     public void ShowUnicornAsset_IfExists() {
         var display = new MockDisplay();
@@ -14,7 +13,7 @@ public class PortfolioTest
             }
         };
         var app = new Portfolio(display, repository);
-        
+
         app.ComputePortfolioValue();
 
         Assert.That(display.UnicornAsset, Is.Not.Null);
@@ -22,12 +21,27 @@ public class PortfolioTest
     }
 
     [Test]
-    public void ShowPortfolioValue() {
+    public void DoNotShowUnicorn_IfValueIsZero() {
         var display = new MockDisplay();
-        var app = new Portfolio(display, new CsvPortfolioRepository("../../../portfolio_no_unicorn.csv"));
+        var repository = new StubRepository {
+            Assets = new[] {
+                new Asset("Unicorn", new DateTime(), new MeasurableValue(0))
+            }
+        };
+        var app = new Portfolio(display, repository);
         
         app.ComputePortfolioValue();
         
+        Assert.That(display.UnicornAsset, Is.Null);
+    }
+
+    [Test]
+    public void ShowPortfolioValue() {
+        var display = new MockDisplay();
+        var app = new Portfolio(display, new CsvPortfolioRepository("../../../portfolio_no_unicorn.csv"));
+
+        app.ComputePortfolioValue();
+
         Assert.That(display.PortfolioValue.Get(), Is.EqualTo(120));
     }
 }
