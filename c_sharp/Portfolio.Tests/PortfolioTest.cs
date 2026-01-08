@@ -18,12 +18,12 @@ public class MockDisplay : Display {
 public class PortfolioTest
 {
     [Test]
-    public void Fix_Me() {
+    public void ShowUnicornAsset_IfExists() {
         var display = new MockDisplay();
         var app = new Portfolio("../../../portfolio.csv", display);
 
         app.ComputePortfolioValue();
 
-        Assert.That("fixme", Is.EqualTo("fixme"));
+        Assert.That(display.UnicornAsset, Is.Not.Null);
     }
 }
