@@ -19,25 +19,6 @@ public class Asset
 
     public Value Value { get; set; }
 
-    bool Equals(Asset other) {
-        return _date.Equals(other._date) && Description == other.Description && Value.Get().Equals(other.Value.Get());
-    }
-
-    public override bool Equals(object? obj) {
-        if (obj is null) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != GetType()) return false;
-        return Equals((Asset)obj);
-    }
-
-    public override int GetHashCode() {
-        return HashCode.Combine(_date, Description, Value);
-    }
-    
-    public override string ToString() {
-        return $"{nameof(_date)}: {_date}, {nameof(Description)}: {Description}, {nameof(Value)}: {Value}";
-    }
-
     public void GetValue(DateTime now) {
         if (Date.Subtract(now).TotalDays < 0)
         {
@@ -103,6 +84,25 @@ public class Asset
                 }
             }
         }
+    }
+
+    bool Equals(Asset other) {
+        return _date.Equals(other._date) && Description == other.Description && Value.Get().Equals(other.Value.Get());
+    }
+
+    public override bool Equals(object? obj) {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != GetType()) return false;
+        return Equals((Asset)obj);
+    }
+
+    public override int GetHashCode() {
+        return HashCode.Combine(_date, Description, Value);
+    }
+
+    public override string ToString() {
+        return $"{nameof(_date)}: {_date}, {nameof(Description)}: {Description}, {nameof(Value)}: {Value}";
     }
 }
 
