@@ -20,78 +20,85 @@ public class Asset
     public Value Value { get; set; }
 
     public Value GetValue(DateTime now) {
-        if (Date.Subtract(now).TotalDays < 0)
+        if (Expired(now)) {
+            return MeasurableValue();
+        }
+        else {
+            return BaseValue(now);
+        }
+    }
+
+    bool Expired(DateTime now) {
+        return Date.Subtract(now).TotalDays < 0;
+    }
+
+    Value BaseValue(DateTime now) {
+        if (Description != "French Wine" && Description != "Lottery Prediction")
         {
-            if (Description != "French Wine")
+            if (Value.Get() > 0.0)
             {
-                if (Description != "Lottery Prediction")
-                {
-                    if (Value.Get() > 0)
-                    {
-                        if (Description != "Unicorn")
-                        {
-                            return new MeasurableValue(Value.Get() - 20);
-                        }
-                    }
+                if (Description != "Unicorn") {
+                    return new MeasurableValue(Value.Get() - 10);
                 }
-                else
+            }
+            else
+            {
+                if (Description == "Unicorn") {
+                }
+            }
+        }
+        else
+        {
+            if (Description == "Lottery Prediction")
+            {
+                if (Value.Get() < 800)
                 {
-                    return new MeasurableValue(Value.Get() - Value.Get());
+                    var baseValue = new MeasurableValue(Value.Get() + 5);
+
+                    if (Date.Subtract(now).TotalDays < 11)
+                        if (baseValue.Get() < 800)
+                            baseValue = new MeasurableValue(baseValue.Get() + 20);
+
+                    if (Date.Subtract(now).TotalDays < 6)
+                        if (baseValue.Get() < 800)
+                            baseValue = new MeasurableValue(baseValue.Get() + 100);
+
+                    return baseValue;
                 }
             }
             else
             {
                 if (Value.Get() < 200) 
-                    return new MeasurableValue(Value.Get() + 20);
+                    return new MeasurableValue(Value.Get() + 10);
             }
+        }
 
-            return Value;
+        return Value;
+    }
+
+    Value MeasurableValue() {
+        if (Description != "French Wine")
+        {
+            if (Description != "Lottery Prediction")
+            {
+                if (Value.Get() > 0)
+                {
+                    if (Description != "Unicorn") {
+                        return new MeasurableValue(Value.Get() - 20);
+                    }
+                }
+            }
+            else {
+                return new MeasurableValue(Value.Get() - Value.Get());
+            }
         }
         else
         {
-            if (Description != "French Wine" && Description != "Lottery Prediction")
-            {
-                if (Value.Get() > 0.0)
-                {
-                    if (Description != "Unicorn")
-                    {
-                        return new MeasurableValue(Value.Get() - 10);
-                    }
-                }
-                else
-                {
-                    if (Description == "Unicorn") {
-                    }
-                }
-            }
-            else
-            {
-                if (Description == "Lottery Prediction")
-                {
-                    if (Value.Get() < 800)
-                    {
-                        var baseValue = new MeasurableValue(Value.Get() + 5);
-
-                        if (Date.Subtract(now).TotalDays < 11)
-                            if (baseValue.Get() < 800)
-                                baseValue = new MeasurableValue(baseValue.Get() + 20);
-
-                        if (Date.Subtract(now).TotalDays < 6)
-                            if (baseValue.Get() < 800)
-                                baseValue = new MeasurableValue(baseValue.Get() + 100);
-
-                        return baseValue;
-                    }
-                }
-                else
-                {
-                    if (Value.Get() < 200) 
-                        return new MeasurableValue(Value.Get() + 10);
-                }
-            }
-            
-            return Value;
+            if (Value.Get() < 200) 
+                return new MeasurableValue(Value.Get() + 20);
         }
+
+        return Value;
     }
 
     public bool IsUnicorn(DateTime now) {
