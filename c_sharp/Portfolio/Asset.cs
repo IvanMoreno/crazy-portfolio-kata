@@ -86,6 +86,17 @@ public class Asset
         }
     }
 
+    public bool IsUnicorn(DateTime now) {
+        if (Description != "Unicorn") 
+            return false;
+        
+        if (Date.Subtract(now).TotalDays < 0) {
+            return Value.Get() > 0;
+        }
+
+        return true;
+    }
+
     bool Equals(Asset other) {
         return _date.Equals(other._date) && Description == other.Description && Value.Get().Equals(other.Value.Get());
     }
