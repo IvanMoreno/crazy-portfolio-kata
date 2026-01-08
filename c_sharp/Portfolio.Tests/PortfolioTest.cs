@@ -15,13 +15,27 @@ public class MockDisplay : Display {
     }
 }
 
+public class StubRepository : PortfolioRepository {
+    public IEnumerable<Asset> Assets { get; set; }
+    
+    public IEnumerable<Asset> GetAssets() {
+        return Assets;
+    }
+}
+
 public class PortfolioTest
 {
     [Test]
     public void ShowUnicornAsset_IfExists() {
         var display = new MockDisplay();
-        var app = new Portfolio(display, new CsvPortfolioRepository("../../../portfolio.csv"));
-
+        var repository = new StubRepository {
+            Assets = new[] {
+                new Asset("Unicorn", new DateTime(), new MeasurableValue(100)),
+                new Asset("French Wine", new DateTime(), new MeasurableValue(100))
+            }
+        };
+        var app = new Portfolio(display, repository);
+        
         app.ComputePortfolioValue();
 
         Assert.That(display.UnicornAsset, Is.Not.Null);

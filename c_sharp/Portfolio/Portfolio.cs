@@ -47,9 +47,9 @@ public class CsvPortfolioRepository : PortfolioRepository {
 public class Portfolio
 {
     readonly Display _display;
-    readonly CsvPortfolioRepository _portfolioRepository;
+    readonly PortfolioRepository _portfolioRepository;
 
-    public Portfolio(Display display, CsvPortfolioRepository portfolioRepository) {
+    public Portfolio(Display display, PortfolioRepository portfolioRepository) {
         _portfolioRepository = portfolioRepository;
         _display = display;
     }
