@@ -30,18 +30,19 @@ public class Asset
                     {
                         if (Description != "Unicorn")
                         {
-                            Value = new MeasurableValue(Value.Get() - 20);
+                            return new MeasurableValue(Value.Get() - 20);
                         }
                     }
                 }
                 else
                 {
-                    Value = new MeasurableValue(Value.Get() - Value.Get());
+                    return new MeasurableValue(Value.Get() - Value.Get());
                 }
             }
             else
             {
-                if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 20);
+                if (Value.Get() < 200) 
+                    return new MeasurableValue(Value.Get() + 20);
             }
         }
         else
@@ -52,7 +53,7 @@ public class Asset
                 {
                     if (Description != "Unicorn")
                     {
-                        Value = new MeasurableValue(Value.Get() - 10);
+                        return new MeasurableValue(Value.Get() - 10);
                     }
                 }
                 else
@@ -67,20 +68,23 @@ public class Asset
                 {
                     if (Value.Get() < 800)
                     {
-                        Value = new MeasurableValue(Value.Get() + 5);
+                        var baseValue = new MeasurableValue(Value.Get() + 5);
 
                         if (Date.Subtract(now).TotalDays < 11)
-                            if (Value.Get() < 800)
-                                Value = new MeasurableValue(Value.Get() + 20);
+                            if (baseValue.Get() < 800)
+                                baseValue = new MeasurableValue(baseValue.Get() + 20);
 
                         if (Date.Subtract(now).TotalDays < 6)
-                            if (Value.Get() < 800)
-                                Value = new MeasurableValue(Value.Get() + 100);
+                            if (baseValue.Get() < 800)
+                                baseValue = new MeasurableValue(baseValue.Get() + 100);
+
+                        return baseValue;
                     }
                 }
                 else
                 {
-                    if (Value.Get() < 200) Value = new MeasurableValue(Value.Get() + 10);
+                    if (Value.Get() < 200) 
+                        return new MeasurableValue(Value.Get() + 10);
                 }
             }
         }
