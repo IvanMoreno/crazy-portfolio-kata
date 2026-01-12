@@ -2,7 +2,7 @@ using System.Globalization;
 
 namespace Portfolio;
 
-public class Asset
+public abstract class Asset
 {
     private readonly DateTime _date;
 
@@ -68,29 +68,7 @@ public class Asset
         return Value;
     }
 
-    protected virtual Value ExpiredValue() {
-        if (Description == "French Wine") {
-            throw new NotImplementedException();
-        }
-
-        if (Description == "Lottery Prediction") {
-            throw new NotImplementedException();
-        }
-
-        if (Description == "Unicorn") {
-            if (Value.Get() > 0) {
-                return Value.Priceless();
-            }
-
-            return Value;
-        }
-
-        if (Value.Get() > 0) {
-            return Value.Measurable(Value.Get() - 20);
-        }
-
-        return Value;
-    }
+    protected abstract Value ExpiredValue();
 
     public bool IsUnicorn(DateTime now) {
         if (Description != "Unicorn") 
@@ -122,6 +100,30 @@ public class Asset
         }
     }
 
+    class Unicorn : Asset {
+        public Unicorn(string description, DateTime date, Value value) : base(description, date, value) { }
+
+        protected override Value ExpiredValue() {
+            if (Value.Get() > 0) {
+                return Value.Priceless();
+            }
+
+            return Value;
+        }
+    }
+    
+    class Default : Asset {
+        public Default(string description, DateTime date, Value value) : base(description, date, value) { }
+
+        protected override Value ExpiredValue() {
+            if (Value.Get() > 0) {
+                return Value.Priceless();
+            }
+
+            return Value;
+        }
+    }
+
     bool Equals(Asset other) {
         return _date.Equals(other._date) && Description == other.Description && Value.Get().Equals(other.Value.Get());
     }
@@ -147,8 +149,11 @@ public class Asset
         
         if (description == "Lottery Prediction") 
             return new LotteryPrediction(description, date, value);
+
+        if (description == "Unicorn")
+            return new Unicorn(description, date, value);
         
-        return new Asset(description, date, value);
+        return new Default(description, date, value);
     }
 }
 
