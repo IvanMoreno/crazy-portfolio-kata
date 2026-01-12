@@ -20,8 +20,8 @@ public class Portfolio
 
     public void ComputePortfolioValue()
     {
-        var now = _clock.Now();
-        var assets = _portfolioRepository.GetAssets2(now);
+        var assets = _portfolioRepository.GetAssets2(_clock.Now());
+        
         if (assets.ExistsUnicorn()) {
             _display.ShowUnicorn(assets.FirstUnicorn());
             return;
