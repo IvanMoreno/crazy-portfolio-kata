@@ -126,9 +126,9 @@ public class Asset
 
 public class Value
 {
-    protected readonly int _value;
+    readonly int _value;
 
-    protected Value(int value)
+    Value(int value)
     {
         _value = value;
     }
