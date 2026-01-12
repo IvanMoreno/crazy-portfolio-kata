@@ -1,10 +1,10 @@
 namespace Portfolio.Tests;
 
 public class MockDisplay : Display {
-    public MeasurableValue PortfolioValue { get; private set; }
+    public Value PortfolioValue { get; private set; }
     public Asset UnicornAsset { get; private set; }
 
-    public void ShowPortfolio(MeasurableValue portfolioValue) {
+    public void ShowPortfolio(Value portfolioValue) {
         this.PortfolioValue = portfolioValue;
     }
     
