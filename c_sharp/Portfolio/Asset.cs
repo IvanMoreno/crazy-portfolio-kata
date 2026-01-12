@@ -35,15 +35,15 @@ public class Asset
     Value NonExpiredValue(DateTime now) {
         if (Description == "Lottery Prediction") {
             if (Value.Get() < 800) {
-                var baseValue = MeasurableValue.Measurable(Value.Get() + 5);
+                var baseValue = Value.Measurable(Value.Get() + 5);
 
                 if (Date.Subtract(now).TotalDays < 11)
                     if (baseValue.Get() < 800)
-                        baseValue = MeasurableValue.Measurable(baseValue.Get() + 20);
+                        baseValue = Value.Measurable(baseValue.Get() + 20);
 
                 if (Date.Subtract(now).TotalDays < 6)
                     if (baseValue.Get() < 800)
-                        baseValue = MeasurableValue.Measurable(baseValue.Get() + 100);
+                        baseValue = Value.Measurable(baseValue.Get() + 100);
 
                 return baseValue;
             }
@@ -53,15 +53,15 @@ public class Asset
 
         if (Description == "French Wine") {
             if (Value.Get() < 200)
-                return MeasurableValue.Measurable(Value.Get() + 10);
+                return Value.Measurable(Value.Get() + 10);
         }
 
         if (Description == "Unicorn") {
-            return PricelessValue.Priceless();
+            return Value.Priceless();
         }
         else {
             if (Value.Get() > 0.0) {
-                return MeasurableValue.Measurable(Value.Get() - 10);
+                return Value.Measurable(Value.Get() - 10);
             }
         }
 
@@ -75,19 +75,19 @@ public class Asset
             {
                 if (Value.Get() > 0) {
                     if (Description == "Unicorn") 
-                        return PricelessValue.Priceless();
+                        return Value.Priceless();
                     
-                    return MeasurableValue.Measurable(Value.Get() - 20);
+                    return Value.Measurable(Value.Get() - 20);
                 }
             }
             else {
-                return MeasurableValue.Measurable(Value.Get() - Value.Get());
+                return Value.Measurable(Value.Get() - Value.Get());
             }
         }
         else
         {
             if (Value.Get() < 200) 
-                return MeasurableValue.Measurable(Value.Get() + 20);
+                return Value.Measurable(Value.Get() + 20);
         }
 
         return Value;

@@ -11,6 +11,6 @@ public class CsvPortfolioRepositoryTests {
         
         Assert.That(assets, Is.Not.Null);
         Assert.That(assets.Count(), Is.EqualTo(3));
-        Assert.That(assets.First(), Is.EqualTo(new Asset("French Wine", new DateTime(day:15, month:1, year:2024), MeasurableValue.Measurable((int)100))));
+        Assert.That(assets.First(), Is.EqualTo(new Asset("French Wine", new DateTime(day:15, month:1, year:2024), Value.Measurable(100))));
     }
 }

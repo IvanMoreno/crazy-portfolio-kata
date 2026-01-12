@@ -19,6 +19,6 @@ public class CsvPortfolioRepository : PortfolioRepository {
         var columns = line.Split(",");
         return new Asset(columns[0],
             DateTime.Parse(columns[1], CultureInfo.CurrentCulture),
-            MeasurableValue.Measurable(int.Parse(columns[2])));
+            Value.Measurable(int.Parse(columns[2])));
     }
 }
