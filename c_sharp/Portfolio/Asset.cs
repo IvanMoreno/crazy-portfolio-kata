@@ -34,17 +34,7 @@ public abstract class Asset
 
     protected abstract Value ExpiredValue();
     protected abstract Value NonExpiredValue(DateTime now);
-
-    public bool IsUnicorn(DateTime now) {
-        if (Description != "Unicorn") 
-            return false;
-        
-        if (Date.Subtract(now).TotalDays < 0) {
-            return Value.Get() > 0;
-        }
-
-        return true;
-    }
+    public abstract bool IsUnicorn(DateTime now);
 
     class FrenchWine : Asset {
         public FrenchWine(string description, DateTime date, Value value) : base(description, date, value) { }
@@ -54,6 +44,10 @@ public abstract class Asset
                 return Value.Measurable(Value.Get() + 10);
 
             return Value;
+        }
+
+        public override bool IsUnicorn(DateTime now) {
+            return false;
         }
 
         protected override Value ExpiredValue() {
@@ -85,6 +79,10 @@ public abstract class Asset
             return Value;
         }
 
+        public override bool IsUnicorn(DateTime now) {
+            return false;
+        }
+
         protected override Value ExpiredValue() {
             return Value.Measurable(Value.Get() - Value.Get());
         }
@@ -95,6 +93,14 @@ public abstract class Asset
 
         protected override Value NonExpiredValue(DateTime now) {
             return Value.Priceless();
+        }
+
+        public override bool IsUnicorn(DateTime now) {
+            if (Expired(now)) {
+                return Value.Get() > 0;
+            }
+
+            return true;
         }
 
         protected override Value ExpiredValue() {
@@ -115,6 +121,10 @@ public abstract class Asset
             }
 
             return Value;
+        }
+
+        public override bool IsUnicorn(DateTime now) {
+            return false;
         }
 
         protected override Value ExpiredValue() {
