@@ -57,7 +57,7 @@ public class Asset
         }
 
         if (Description == "Unicorn") {
-            // Nothing
+            return new PricelessValue();
         }
         else {
             if (Value.Get() > 0.0) {
@@ -73,11 +73,11 @@ public class Asset
         {
             if (Description != "Lottery Prediction")
             {
-                if (Value.Get() > 0)
-                {
-                    if (Description != "Unicorn") {
-                        return new MeasurableValue(Value.Get() - 20);
-                    }
+                if (Value.Get() > 0) {
+                    if (Description == "Unicorn") 
+                        return new PricelessValue();
+                    
+                    return new MeasurableValue(Value.Get() - 20);
                 }
             }
             else {
