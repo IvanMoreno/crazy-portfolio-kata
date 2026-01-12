@@ -28,4 +28,8 @@ public class Value
     {
         return _value.ToString(CultureInfo.CurrentCulture);
     }
+
+    public Value Add(Value addend) {
+        return Measurable(Get() + addend.Get());
+    }
 }

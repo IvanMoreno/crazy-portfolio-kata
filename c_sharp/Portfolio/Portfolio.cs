@@ -21,7 +21,7 @@ public class Portfolio
                 return;
             }
 
-            portfolioValue = Value.Measurable(portfolioValue.Get() + asset.GetValue(now).Get());
+            portfolioValue = portfolioValue.Add(asset.GetValue(now));
         }
 
         _display.ShowPortfolio(portfolioValue);
