@@ -57,7 +57,7 @@ public class Asset
         }
 
         if (Description == "Unicorn") {
-            return new PricelessValue();
+            return PricelessValue.Priceless();
         }
         else {
             if (Value.Get() > 0.0) {
@@ -75,7 +75,7 @@ public class Asset
             {
                 if (Value.Get() > 0) {
                     if (Description == "Unicorn") 
-                        return new PricelessValue();
+                        return PricelessValue.Priceless();
                     
                     return MeasurableValue.Measurable(Value.Get() - 20);
                 }
@@ -140,6 +140,10 @@ public abstract class Value
 
     public static MeasurableValue Measurable(int value) {
         return new MeasurableValue(value);
+    }
+
+    public static PricelessValue Priceless() {
+        return new PricelessValue();
     }
 }
 
