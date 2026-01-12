@@ -69,25 +69,27 @@ public class Asset
     }
 
     Value ExpiredValue() {
-        if (Description != "French Wine")
-        {
-            if (Description != "Lottery Prediction")
-            {
-                if (Value.Get() > 0) {
-                    if (Description == "Unicorn") 
-                        return Value.Priceless();
-                    
-                    return Value.Measurable(Value.Get() - 20);
-                }
-            }
-            else {
-                return Value.Measurable(Value.Get() - Value.Get());
-            }
-        }
-        else
-        {
-            if (Value.Get() < 200) 
+        if (Description == "French Wine") {
+            if (Value.Get() < 200)
                 return Value.Measurable(Value.Get() + 20);
+
+            return Value;
+        }
+
+        if (Description == "Lottery Prediction") {
+            return Value.Measurable(Value.Get() - Value.Get());
+        }
+
+        if (Description == "Unicorn") {
+            if (Value.Get() > 0) {
+                return Value.Priceless();
+            }
+
+            return Value;
+        }
+
+        if (Value.Get() > 0) {
+            return Value.Measurable(Value.Get() - 20);
         }
 
         return Value;
