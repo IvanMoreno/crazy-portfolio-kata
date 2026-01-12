@@ -6,13 +6,13 @@ public class Asset
 {
     private readonly DateTime _date;
 
-    public Asset(string description, DateTime date, Value value)
+    Asset(string description, DateTime date, Value value)
     {
         Description = description;
         _date = date;
         Value = value;
     }
-
+    
     public string Description { get; }
 
     public DateTime Date => _date.Date;
@@ -68,12 +68,9 @@ public class Asset
         return Value;
     }
 
-    Value ExpiredValue() {
+    protected virtual Value ExpiredValue() {
         if (Description == "French Wine") {
-            if (Value.Get() < 200)
-                return Value.Measurable(Value.Get() + 20);
-
-            return Value;
+            throw new NotImplementedException();
         }
 
         if (Description == "Lottery Prediction") {
@@ -106,6 +103,17 @@ public class Asset
         return true;
     }
 
+    class FrenchWine : Asset {
+        public FrenchWine(string description, DateTime date, Value value) : base(description, date, value) { }
+
+        protected override Value ExpiredValue() {
+            if (Value.Get() < 200)
+                return Value.Measurable(Value.Get() + 20);
+
+            return Value;
+        }
+    }
+
     bool Equals(Asset other) {
         return _date.Equals(other._date) && Description == other.Description && Value.Get().Equals(other.Value.Get());
     }
@@ -123,6 +131,13 @@ public class Asset
 
     public override string ToString() {
         return $"{nameof(_date)}: {_date}, {nameof(Description)}: {Description}, {nameof(Value)}: {Value}";
+    }
+    
+    public static Asset Create(string description, DateTime date, Value value) {
+        if (description == "French Wine")
+            return new FrenchWine(description, date, value);
+        
+        return new Asset(description, date, value);
     }
 }
 
