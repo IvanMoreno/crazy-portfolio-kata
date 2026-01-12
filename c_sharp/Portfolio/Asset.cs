@@ -138,11 +138,11 @@ public abstract class Value
         return _value;
     }
 
-    public static MeasurableValue Measurable(int value) {
+    public static Value Measurable(int value) {
         return new MeasurableValue(value);
     }
 
-    public static PricelessValue Priceless() {
+    public static Value Priceless() {
         return new PricelessValue();
     }
 }
