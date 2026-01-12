@@ -35,15 +35,15 @@ public class Asset
     Value NonExpiredValue(DateTime now) {
         if (Description == "Lottery Prediction") {
             if (Value.Get() < 800) {
-                var baseValue = new MeasurableValue(Value.Get() + 5);
+                var baseValue = MeasurableValue.Measurable(Value.Get() + 5);
 
                 if (Date.Subtract(now).TotalDays < 11)
                     if (baseValue.Get() < 800)
-                        baseValue = new MeasurableValue(baseValue.Get() + 20);
+                        baseValue = MeasurableValue.Measurable(baseValue.Get() + 20);
 
                 if (Date.Subtract(now).TotalDays < 6)
                     if (baseValue.Get() < 800)
-                        baseValue = new MeasurableValue(baseValue.Get() + 100);
+                        baseValue = MeasurableValue.Measurable(baseValue.Get() + 100);
 
                 return baseValue;
             }
@@ -53,7 +53,7 @@ public class Asset
 
         if (Description == "French Wine") {
             if (Value.Get() < 200)
-                return new MeasurableValue(Value.Get() + 10);
+                return MeasurableValue.Measurable(Value.Get() + 10);
         }
 
         if (Description == "Unicorn") {
@@ -61,7 +61,7 @@ public class Asset
         }
         else {
             if (Value.Get() > 0.0) {
-                return new MeasurableValue(Value.Get() - 10);
+                return MeasurableValue.Measurable(Value.Get() - 10);
             }
         }
 
@@ -77,17 +77,17 @@ public class Asset
                     if (Description == "Unicorn") 
                         return new PricelessValue();
                     
-                    return new MeasurableValue(Value.Get() - 20);
+                    return MeasurableValue.Measurable(Value.Get() - 20);
                 }
             }
             else {
-                return new MeasurableValue(Value.Get() - Value.Get());
+                return MeasurableValue.Measurable(Value.Get() - Value.Get());
             }
         }
         else
         {
             if (Value.Get() < 200) 
-                return new MeasurableValue(Value.Get() + 20);
+                return MeasurableValue.Measurable(Value.Get() + 20);
         }
 
         return Value;
@@ -136,6 +136,10 @@ public abstract class Value
     public int Get()
     {
         return _value;
+    }
+
+    public static MeasurableValue Measurable(int value) {
+        return new MeasurableValue(value);
     }
 }
 

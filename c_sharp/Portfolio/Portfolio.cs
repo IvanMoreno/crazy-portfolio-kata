@@ -13,7 +13,7 @@ public class Portfolio
     public void ComputePortfolioValue()
     {
         var now = DateTime.Now;
-        var portfolioValue = new MeasurableValue(0);
+        var portfolioValue = MeasurableValue.Measurable((int)0);
         
         foreach (var asset in _portfolioRepository.GetAssets()) {
             if (asset.IsUnicorn(now)) {
@@ -21,7 +21,7 @@ public class Portfolio
                 return;
             }
 
-            portfolioValue = new MeasurableValue(portfolioValue.Get() + asset.GetValue(now).Get());
+            portfolioValue = MeasurableValue.Measurable(portfolioValue.Get() + asset.GetValue(now).Get());
         }
 
         _display.ShowPortfolio(portfolioValue);

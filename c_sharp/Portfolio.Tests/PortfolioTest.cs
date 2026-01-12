@@ -8,8 +8,8 @@ public class PortfolioTest {
         var display = new MockDisplay();
         var repository = new StubRepository {
             Assets = new[] {
-                new Asset("Unicorn", new DateTime(), new MeasurableValue(100)),
-                new Asset("French Wine", new DateTime(), new MeasurableValue(100))
+                new Asset("Unicorn", new DateTime(), MeasurableValue.Measurable((int)100)),
+                new Asset("French Wine", new DateTime(), MeasurableValue.Measurable((int)100))
             }
         };
         var app = new Portfolio(display, repository);
@@ -25,7 +25,7 @@ public class PortfolioTest {
         var display = new MockDisplay();
         var repository = new StubRepository {
             Assets = new[] {
-                new Asset("Unicorn", new DateTime(), new MeasurableValue(0))
+                new Asset("Unicorn", new DateTime(), MeasurableValue.Measurable((int)0))
             }
         };
         var app = new Portfolio(display, repository);
