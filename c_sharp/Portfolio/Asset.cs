@@ -20,12 +20,7 @@ public abstract class Asset
     public Value Value { get; set; }
 
     public Value GetValue(DateTime now) {
-        if (Expired(now)) {
-            return ExpiredValue();
-        }
-        else {
-            return NonExpiredValue(now);
-        }
+        return Expired(now) ? ExpiredValue() : NonExpiredValue(now);
     }
 
     bool Expired(DateTime now) {
