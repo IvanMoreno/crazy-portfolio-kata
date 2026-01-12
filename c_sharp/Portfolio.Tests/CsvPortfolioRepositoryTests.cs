@@ -7,7 +7,7 @@ public class CsvPortfolioRepositoryTests {
     public void GetAllAssets() {
         var repository = new CsvPortfolioRepository("../../../portfolio.csv");
 
-        var assets = repository.GetAssets();
+        var assets = repository.GetAssets2(DateTime.Now);
         
         Assert.That(assets, Is.Not.Null);
         Assert.That(assets.Count(), Is.EqualTo(3));

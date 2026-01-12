@@ -13,7 +13,7 @@ public class CsvPortfolioRepository : PortfolioRepository {
         return new(GetAssets(), now);
     }
 
-    public IEnumerable<Asset> GetAssets() {
+    IEnumerable<Asset> GetAssets() {
         var readText = File.ReadAllText(_portfolioCsvPath);
         var lines = readText.Split(Environment.NewLine);
         return lines.Select(Parse);

@@ -1,6 +1,8 @@
+using System.Collections;
+
 namespace Portfolio;
 
-public class AssetCollection {
+public class AssetCollection : IEnumerable<Asset> {
     readonly IEnumerable<Asset> assets;
     readonly DateTime now;
 
@@ -19,5 +21,13 @@ public class AssetCollection {
 
     public Value TotalValue() {
         return assets.Aggregate(Value.Measurable(0), (acc, asset) => acc.Add(asset.GetValue(now)));
+    }
+
+    public IEnumerator<Asset> GetEnumerator() {
+        return assets.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() {
+        return GetEnumerator();
     }
 }
