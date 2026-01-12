@@ -151,29 +151,3 @@ public class Value
         return _value.ToString(CultureInfo.CurrentCulture);
     }
 }
-
-public class MeasurableValue : Value
-{
-    public MeasurableValue(int value) : base(value)
-    {
-    }
-
-    public override string ToString()
-    {
-        return _value.ToString(CultureInfo.CurrentCulture);
-    }
-}
-
-public class PricelessValue : Value
-{
-    public PricelessValue() : base(int.MaxValue)
-    {
-    }
-}
-
-public class NoValue : Value
-{
-    public NoValue() : base(0)
-    {
-    }
-}
