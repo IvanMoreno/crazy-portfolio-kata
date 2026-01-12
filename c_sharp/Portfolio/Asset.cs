@@ -74,7 +74,7 @@ public class Asset
         }
 
         if (Description == "Lottery Prediction") {
-            return Value.Measurable(Value.Get() - Value.Get());
+            throw new NotImplementedException();
         }
 
         if (Description == "Unicorn") {
@@ -114,6 +114,14 @@ public class Asset
         }
     }
 
+    class LotteryPrediction : Asset {
+        public LotteryPrediction(string description, DateTime date, Value value) : base(description, date, value) { }
+        
+        protected override Value ExpiredValue() {
+            return Value.Measurable(Value.Get() - Value.Get());
+        }
+    }
+
     bool Equals(Asset other) {
         return _date.Equals(other._date) && Description == other.Description && Value.Get().Equals(other.Value.Get());
     }
@@ -136,6 +144,9 @@ public class Asset
     public static Asset Create(string description, DateTime date, Value value) {
         if (description == "French Wine")
             return new FrenchWine(description, date, value);
+        
+        if (description == "Lottery Prediction") 
+            return new LotteryPrediction(description, date, value);
         
         return new Asset(description, date, value);
     }
