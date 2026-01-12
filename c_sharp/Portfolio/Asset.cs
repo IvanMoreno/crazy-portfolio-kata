@@ -124,7 +124,7 @@ public class Asset
     }
 }
 
-public abstract class Value
+public class Value
 {
     protected readonly int _value;
 
@@ -139,7 +139,7 @@ public abstract class Value
     }
 
     public static Value Measurable(int value) {
-        return new MeasurableValue(value);
+        return new Value(value);
     }
 
     public static Value Priceless() {
