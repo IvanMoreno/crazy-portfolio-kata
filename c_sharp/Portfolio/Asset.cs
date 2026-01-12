@@ -143,7 +143,7 @@ public class Value
     }
 
     public static Value Priceless() {
-        return new PricelessValue();
+        return new Value(int.MaxValue);
     }
     
     public override string ToString()
