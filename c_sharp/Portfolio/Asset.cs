@@ -84,7 +84,7 @@ public abstract class Asset
         }
 
         protected override Value ExpiredValue() {
-            return Value.Measurable(Value.Get() - Value.Get());
+            return Value.Measurable(0);
         }
     }
 
