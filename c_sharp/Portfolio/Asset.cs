@@ -30,10 +30,11 @@ public abstract class Asset
     public abstract bool IsUnicorn(DateTime now);
 
     class FrenchWine : Asset {
+        bool ReachedMaxPrice => Value.Get() < 200;
         public FrenchWine(string description, DateTime date, Value value) : base(description, date, value) { }
 
         protected override Value NonExpiredValue(DateTime now) {
-            if (Value.Get() < 200)
+            if (ReachedMaxPrice)
                 return Value.Measurable(Value.Get() + 10);
 
             return Value;
@@ -44,7 +45,7 @@ public abstract class Asset
         }
 
         protected override Value ExpiredValue() {
-            if (Value.Get() < 200)
+            if (ReachedMaxPrice)
                 return Value.Measurable(Value.Get() + 20);
 
             return Value;
