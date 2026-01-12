@@ -9,7 +9,7 @@ public class CsvPortfolioRepository : PortfolioRepository {
         _portfolioCsvPath = portfolioCsvPath;
     }
 
-    public AssetCollection GetAssets2(DateTime now) {
+    public AssetCollection GetAssets(DateTime now) {
         return new(GetAssets(), now);
     }
 
