@@ -9,6 +9,10 @@ public class CsvPortfolioRepository : PortfolioRepository {
         _portfolioCsvPath = portfolioCsvPath;
     }
 
+    public AssetCollection GetAssets2(DateTime now) {
+        return new(GetAssets(), now);
+    }
+
     public IEnumerable<Asset> GetAssets() {
         var readText = File.ReadAllText(_portfolioCsvPath);
         var lines = readText.Split(Environment.NewLine);
