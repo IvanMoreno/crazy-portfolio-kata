@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Portfolio;
 
 public abstract class Asset
@@ -161,33 +159,5 @@ public abstract class Asset
             return new Unicorn(description, date, value);
         
         return new Default(description, date, value);
-    }
-}
-
-public class Value
-{
-    readonly int _value;
-
-    Value(int value)
-    {
-        _value = value;
-    }
-
-    public int Get()
-    {
-        return _value;
-    }
-
-    public static Value Measurable(int value) {
-        return new Value(value);
-    }
-
-    public static Value Priceless() {
-        return new Value(int.MaxValue);
-    }
-    
-    public override string ToString()
-    {
-        return _value.ToString(CultureInfo.CurrentCulture);
     }
 }
