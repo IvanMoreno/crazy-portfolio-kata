@@ -21,19 +21,12 @@ public class Portfolio
     public void ComputePortfolioValue()
     {
         var now = _clock.Now();
-        var assets = _portfolioRepository.GetAssets();
-
-        foreach (var asset in assets) {
-            if (asset.IsUnicorn(now)) {
-                _display.ShowUnicorn(asset);
-                return;
-            }
+        var assets = _portfolioRepository.GetAssets2(now);
+        if (assets.ExistsUnicorn()) {
+            _display.ShowUnicorn(assets.FirstUnicorn());
+            return;
         }
 
-        _display.ShowPortfolio(PortfolioValue(assets, now));
-    }
-
-    static Value PortfolioValue(IEnumerable<Asset> assets, DateTime now) {
-        return assets.Aggregate(Value.Measurable(0), (acc, asset) => acc.Add(asset.GetValue(now)));
+        _display.ShowPortfolio(assets.TotalValue());
     }
 }
