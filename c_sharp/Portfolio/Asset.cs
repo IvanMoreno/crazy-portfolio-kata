@@ -32,8 +32,42 @@ public abstract class Asset
         return Date.Subtract(now).TotalDays < 0;
     }
 
-    Value NonExpiredValue(DateTime now) {
-        if (Description == "Lottery Prediction") {
+    protected abstract Value ExpiredValue();
+    protected abstract Value NonExpiredValue(DateTime now);
+
+    public bool IsUnicorn(DateTime now) {
+        if (Description != "Unicorn") 
+            return false;
+        
+        if (Date.Subtract(now).TotalDays < 0) {
+            return Value.Get() > 0;
+        }
+
+        return true;
+    }
+
+    class FrenchWine : Asset {
+        public FrenchWine(string description, DateTime date, Value value) : base(description, date, value) { }
+
+        protected override Value NonExpiredValue(DateTime now) {
+            if (Value.Get() < 200)
+                return Value.Measurable(Value.Get() + 10);
+
+            return Value;
+        }
+
+        protected override Value ExpiredValue() {
+            if (Value.Get() < 200)
+                return Value.Measurable(Value.Get() + 20);
+
+            return Value;
+        }
+    }
+
+    class LotteryPrediction : Asset {
+        public LotteryPrediction(string description, DateTime date, Value value) : base(description, date, value) { }
+
+        protected override Value NonExpiredValue(DateTime now) {
             if (Value.Get() < 800) {
                 var baseValue = Value.Measurable(Value.Get() + 5);
 
@@ -51,50 +85,6 @@ public abstract class Asset
             return Value;
         }
 
-        if (Description == "French Wine") {
-            if (Value.Get() < 200)
-                return Value.Measurable(Value.Get() + 10);
-        }
-
-        if (Description == "Unicorn") {
-            return Value.Priceless();
-        }
-        else {
-            if (Value.Get() > 0.0) {
-                return Value.Measurable(Value.Get() - 10);
-            }
-        }
-
-        return Value;
-    }
-
-    protected abstract Value ExpiredValue();
-
-    public bool IsUnicorn(DateTime now) {
-        if (Description != "Unicorn") 
-            return false;
-        
-        if (Date.Subtract(now).TotalDays < 0) {
-            return Value.Get() > 0;
-        }
-
-        return true;
-    }
-
-    class FrenchWine : Asset {
-        public FrenchWine(string description, DateTime date, Value value) : base(description, date, value) { }
-
-        protected override Value ExpiredValue() {
-            if (Value.Get() < 200)
-                return Value.Measurable(Value.Get() + 20);
-
-            return Value;
-        }
-    }
-
-    class LotteryPrediction : Asset {
-        public LotteryPrediction(string description, DateTime date, Value value) : base(description, date, value) { }
-        
         protected override Value ExpiredValue() {
             return Value.Measurable(Value.Get() - Value.Get());
         }
@@ -102,6 +92,10 @@ public abstract class Asset
 
     class Unicorn : Asset {
         public Unicorn(string description, DateTime date, Value value) : base(description, date, value) { }
+
+        protected override Value NonExpiredValue(DateTime now) {
+            return Value.Priceless();
+        }
 
         protected override Value ExpiredValue() {
             if (Value.Get() > 0) {
@@ -114,6 +108,14 @@ public abstract class Asset
     
     class Default : Asset {
         public Default(string description, DateTime date, Value value) : base(description, date, value) { }
+
+        protected override Value NonExpiredValue(DateTime now) {
+            if (Value.Get() > 0.0) {
+                return Value.Measurable(Value.Get() - 10);
+            }
+
+            return Value;
+        }
 
         protected override Value ExpiredValue() {
             if (Value.Get() > 0) {
