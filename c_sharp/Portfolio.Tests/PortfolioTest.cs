@@ -12,7 +12,7 @@ public class PortfolioTest {
                 Asset.Create((string)"French Wine", new DateTime(), Value.Measurable(100))
             }
         };
-        var app = new Portfolio(display, repository);
+        var app = new Portfolio(display, repository, new RealtimeClock());
 
         app.ComputePortfolioValue();
 
@@ -28,7 +28,7 @@ public class PortfolioTest {
                 Asset.Create((string)"Unicorn", new DateTime(), Value.Measurable(0))
             }
         };
-        var app = new Portfolio(display, repository);
+        var app = new Portfolio(display, repository, new RealtimeClock());
         
         app.ComputePortfolioValue();
         
@@ -38,7 +38,7 @@ public class PortfolioTest {
     [Test]
     public void ShowPortfolioValue() {
         var display = new MockDisplay();
-        var app = new Portfolio(display, new CsvPortfolioRepository("../../../portfolio_no_unicorn.csv"));
+        var app = new Portfolio(display, new CsvPortfolioRepository("../../../portfolio_no_unicorn.csv"), new RealtimeClock());
 
         app.ComputePortfolioValue();
 
