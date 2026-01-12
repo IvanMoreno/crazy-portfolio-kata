@@ -145,6 +145,11 @@ public abstract class Value
     public static Value Priceless() {
         return new PricelessValue();
     }
+    
+    public override string ToString()
+    {
+        return _value.ToString(CultureInfo.CurrentCulture);
+    }
 }
 
 public class MeasurableValue : Value
